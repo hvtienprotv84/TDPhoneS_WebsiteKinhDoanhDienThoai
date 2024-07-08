@@ -1,0 +1,219 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<link rel="stylesheet" href="path/to/font-awesome/css/all.min.css" />
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="brand-link">
+        <img src="~/Admin/dist/img/logo_tdphones.png" alt="AdminLTE Logo" class="brand-image ">
+        <span class="brand-text font-weight-light" style="color: white; font-weight: bold; font-family: unset;">TDPhoneS</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+            <div class="image">
+
+                <img src="~/Uploads/user/@User.Claims.Skip(2).Take(1).FirstOrDefault().Value" style="width: 80px; height: 80px; margin-left: -25px;" class="card-img" alt="User Image" />
+            </div>
+            <div class="info" style="margin-left: -10px;">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="d-block">
+                    Admin: <span style="color: white; font-weight: bold; font-family: unset;">@User.Identity.Name</span>
+                </a>
+                <a asp-area="Admin" asp-controller="Logging" asp-action="Details"><i class="fas fa-address-card"></i> <span style="margin-left: 5px;">Thông Tin Admin</span></a>
+                <!--<span class="text-white">•</span>-->
+                <br/>
+                <a asp-area="Admin" asp-controller="Logging" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> <span style="margin-left: 5px;">Đăng Xuất</span></a>
+            </div>
+        </div>
+        
+
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Dashboard
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+
+
+                <!--Category Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="fas fa-th-list"></i>
+                        <p style="margin-left: 10px;">
+                             Quản Lý Danh Mục
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Danh Mục</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm Danh Mục</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!--Category Navigator Link End-->
+
+                <!--Product Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="far fa-list-alt"></i>
+                        <p style="margin-left: 10px;">
+                             Quản Lý Sản Phẩm
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Sản Phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm Sản Phẩm</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!--Product Navigator Link End-->
+
+                <!--User Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="fas fa-users"></i>
+                        <p style="margin-left: 10px;">
+                            Quản Lý Người Dùng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Người Dùng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="User" asp-action="Create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm Người Dùng</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!--User Navigator Link End-->
+
+                <!--Role Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="fas fa-user-friends"></i>
+                        <p style="margin-left: 10px;">
+                            Quản Lý Quyền
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Quyền</p>
+                            </a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add</p>
+                            </a>
+                        </li> *@
+
+                    </ul>
+                </li>
+                <!--Role Navigator Link End-->
+
+                <!--Order Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="fas fa-box"></i>
+                        <p style="margin-left: 10px;">
+                            Quản Lý Đặt Đơn Hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Đơn Đặt Hàng</p>
+                            </a>
+                        </li>
+                        
+
+                    </ul>
+                </li>
+                <!--Order Navigator Link End-->
+
+                <!--COntact Navigator Link-->
+                <li class="nav-item menu-open">
+                    <a class="nav-link active">
+                        <i class="fas fa-mail-bulk"></i>
+                        <p style="margin-left: 10px;">
+                            Quản Lý Liên Hệ 
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Contact" asp-action="Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Liên Hệ</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <!--COntact Navigator Link End-->
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,521 @@
+﻿@model IEnumerable<TDPhoneS.Models.DataModels.Category>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var userFound = ViewBag.userFound;
+}
+<header class="header-area header-sticky">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/maytinhpopup.css" rel="stylesheet" />
+    <link href="~/css/ghiam.css" rel="stylesheet" />
+    <link href="~/css/language.css" rel="stylesheet" />
+    <link href="~/css/chatai_popup.css" rel="stylesheet" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a asp-controller="Home" asp-action="Index" class="logo" style="margin-left: -180px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                        <img style="width: 100px; height: 40px;" src="~/assets/images/logo_tdphones.png">
+                        <span style="color:red; font-size: 24px; letter-spacing: 0px; text-transform: none;">TDPhoneS</span>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav" id="nav_css">
+                        <li class="scroll-to-section">
+                        <a asp-controller="Home" asp-action="Index"
+                            data-lang="vi"
+                            data-lang-en="Home"
+                            data-lang-vi="Nhà"
+                            data-lang-de="Heim"
+                            data-lang-kr="집"
+                            data-lang-jp="家">
+                        </a>
+                        </li>
+                        <li class="scroll-to-section">
+                         <a asp-controller="Product" asp-action="Index"
+                            data-lang="vi"
+                            data-lang-en="Products"
+                            data-lang-vi="Sản Phẩm"
+                            data-lang-de="Produkt"
+                            data-lang-kr="제품"
+                            data-lang-jp="製品">
+                         </a>
+                         </li>
+                        <li class="submenu">
+                            <a href="javascript:;"
+                               data-lang="vi"
+                               data-lang-en="Category"
+                               data-lang-vi="Danh Mục"
+                               data-lang-de="Kategorie"
+                               data-lang-kr="범주"
+                               data-lang-jp="分類">
+                            </a>
+                            <ul>
+                                @foreach (var item in Model)
+                                {
+
+                                    <li>
+                                        <a asp-controller="Product" asp-action="Index" asp-route-cateId="@item.Id">
+                                            @item.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:;"
+                                data-lang="vi"
+                               data-lang-en="Languages"
+                                data-lang-vi="Ngôn Ngữ"
+                               data-lang-de="Sprache"
+                               data-lang-kr="언어"
+                               data-lang-jp="言語">
+                            </a>
+                            <ul class="language_logo" id="container_language_logo">
+                                <li>
+                                    <button id="vietnameseButton" >
+                                        <img src="https://o.rada.vn/data/image/2021/08/24/la-co-15.svg"
+                                             alt="Mô tả hình ảnh"><br>
+                                             <span class="id_language"
+                                               data-lang="vi"
+                                               data-lang-en="Vietnamese"
+                                               data-lang-vi="Tiếng Việt"
+                                               data-lang-de="Vietnamese"
+                                               data-lang-kr="베트남어"
+                                               data-lang-jp="ベトナム語">
+                                            </span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="englishButton">
+                                        <img src="https://o.rada.vn/data/image/2021/08/24/la-co-37.svg"
+                                             alt="Mô tả hình ảnh"><br>
+                                             <span class ="id_language"
+                                              data-lang="vi"
+                                              data-lang-en="English"
+                                              data-lang-vi="Tiếng Anh"
+                                              data-lang-de="Englisch"
+                                              data-lang-kr="영어"
+                                              data-lang-jp="英語">
+                                             </span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="germanButton">
+                                        <img src="https://o.rada.vn/data/image/2021/08/24/la-co-337.svg"
+                                             alt="Mô tả hình ảnh"><br>
+                                             <span class ="id_language"
+                                              data-lang="vi"
+                                              data-lang-en="German"
+                                              data-lang-vi="Tiếng Đức"
+                                              data-lang-de="Deutsch"
+                                              data-lang-kr="독일 사람"
+                                              data-lang-jp="ドイツ人">
+                                             </span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="koreaButton">
+                                        <img src="https://o.rada.vn/data/image/2021/08/24/la-co-95.svg"
+                                             alt="Mô tả hình ảnh"><br>
+                                             <span class ="id_language"
+                                              data-lang="vi"
+                                              data-lang-en="Korean"
+                                              data-lang-vi="Tiếng Hàn"
+                                              data-lang-de="Koreanisch"
+                                              data-lang-kr="한국인"
+                                              data-lang-jp="韓国語">
+                                             </span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="japanButton">
+                                        <img src="https://o.rada.vn/data/image/2021/08/24/la-co-281.svg"
+                                             alt="Mô tả hình ảnh"><br>
+                                             <span class="id_language"
+                                              data-lang="vi"
+                                              data-lang-en="Japanese"
+                                              data-lang-vi="Tiếng Nhật"
+                                              data-lang-de="Japanisch"
+                                              data-lang-kr="일본어"
+                                              data-lang-jp="日本語">
+                                             </span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:;"
+                                data-lang="vi"
+                                data-lang-en="Utilities"
+                                data-lang-vi="Tiện Ích"
+                                data-lang-de="Dienstprogramme"
+                                data-lang-kr="유용"
+                                data-lang-jp="公共事業">
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/ChatAI"
+                                        data-lang="vi"
+                                        data-lang-en="Chat AI - Consulting"
+                                        data-lang-vi="Chat AI - Tư Vấn"
+                                        data-lang-de="Chat AI – Beratung"
+                                        data-lang-kr="Chat AI - 컨설팅"
+                                        data-lang-jp="チャットAI・コンサルティング">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Notes"
+                                       data-lang="vi"
+                                       data-lang-en="Notes"
+                                       data-lang-vi="Ghi Chú"
+                                       data-lang-de="Notiz"
+                                       data-lang-kr="메모"
+                                       data-lang-jp="注記">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/GoogleMap"
+                                       data-lang="vi"
+                                       data-lang-en="Google Map Branch"
+                                       data-lang-vi="Chi Nhánh Bản Đồ Google"
+                                       data-lang-de="Google Maps-Zweig"
+                                       data-lang-kr="Google 지도 지점"
+                                       data-lang-jp="Google マップ ブランチ">
+                                    </a>
+                                </li>
+                                <li>
+                                    <!--<a asp-controller="ChatAI" asp-action="Index2">Ghi Am</a>-->
+                                </li>                        
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section">
+                         <a asp-controller="About" asp-action="Index"
+                            data-lang="vi"
+                            data-lang-en="About Us"
+                            data-lang-vi="Về chúng tôi"
+                            data-lang-de="Über uns"
+                            data-lang-kr="회사 소개"
+                            data-lang-jp="私たちについて">
+                         </a>
+                         </li>
+                        <li class="scroll-to-section">
+                         <a asp-controller="Contact" asp-action="Index"
+                            data-lang="vi"
+                            data-lang-en="Contact Us"
+                            data-lang-vi="Liên hệ"
+                            data-lang-de="Kontaktiere uns"
+                            data-lang-kr="문의하기"
+                            data-lang-jp="連絡">
+                         </a>
+                         </li>
+                        <!--
+                        <li class="scroll-to-section"><a asp-controller="ChatAI" asp-action="Index">ChatAI</a></li>
+                        <li class="scroll-to-section"><a asp-controller="Notes" asp-action="Index">Notes</a></li>
+                         -->
+                        @if (userFound != null)
+                        {
+                            <li class="submenu">
+                                <a href="javascript:;"
+                                    data-lang="vi"
+                                   data-lang-en="Hello! <span style='color: red;'>@userFound.LastName</span>"
+                                   data-lang-vi="Xin Chào! <span style='color: red;'>@userFound.LastName</span>"
+                                   data-lang-de="Hallo! <span style='color: red;'>@userFound.LastName</span>"
+                                   data-lang-kr="여보세요! <span style='color: red;'>@userFound.LastName</span>"
+                                   data-lang-jp="こんにちは！<span style='color: red;'>@userFound.LastName</span>">
+
+                                    <!--<span style="color: red;">@userFound.LastName</span>-->
+                                </a>
+                                <ul>
+                                    <li class="scroll-to-section">
+                                        <a asp-controller="User" asp-action="Details"
+                                           data-lang="vi"
+                                           data-lang-en="My Profile"
+                                           data-lang-vi="Hồ Sơ Của tôi"
+                                           data-lang-de="Mein Profil"
+                                           data-lang-kr="내 프로필"
+                                           data-lang-jp="私のプロフィール">
+                                         </a>
+                                     </li>
+                                    <li class="scroll-to-section">
+                                        <a asp-controller="Cart" asp-action="Index"
+                                           data-lang="vi"
+                                           data-lang-en="Cart"
+                                           data-lang-vi="Giỏ Hàng"
+                                           data-lang-de="Einkaufskorb"
+                                           data-lang-kr="카트"
+                                           data-lang-jp="カート">
+                                        </a>
+                                     </li>
+                                    <li class="scroll-to-section">
+                                    <a asp-controller="Order" asp-action="Index"
+                                           data-lang="vi"
+                                           data-lang-en="My Orders"
+                                           data-lang-vi="Đơn Hàng Của Tôi"
+                                           data-lang-de="Meine Bestellung"
+                                           data-lang-kr="내 주문"
+                                           data-lang-jp="私の注文">
+                                    </a>
+                                    </li>
+                                    <li class="scroll-to-section">
+                                    <a asp-controller="User" asp-action="LogOut"
+                                           data-lang="vi"
+                                           data-lang-en="Log Out"
+                                           data-lang-vi="Đăng Xuất"
+                                           data-lang-de="Ausloggen"
+                                           data-lang-kr="로그 아웃"
+                                           data-lang-jp="ログアウト">
+                                     </a>
+                                     </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="scroll-to-section">
+                             <a asp-controller="User" asp-action="Login"
+                                   data-lang="vi"
+                                   data-lang-en="Login"
+                                   data-lang-vi="Đăng nhập"
+                                   data-lang-de="Einloggen"
+                                   data-lang-kr="로그인"
+                                   data-lang-jp="ログイン">
+                             </a>
+                             </li>
+                        }
+
+
+                        <li>
+                            <div class="ghiam_css">
+                                <!--<button id="startRecordingBtn">Bắt đầu ghi âm</button>-->
+                                <button id="startRecordingBtn"
+                                        data-lang="vi"
+                                        data-lang-en="Start Recording"
+                                        data-lang-vi="Bắt đầu ghi âm"
+                                        data-lang-de="Aufnahme starten"
+                                        data-lang-kr="녹음 시작"
+                                        data-lang-jp="録音を開始">
+                                </button>
+                                <br />
+                                <!--<input type="text" id="input" placeholder="Nội dung được ghi âm"/>-->
+                                <input type="text" id="input" placeholder=""/>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!--
+                    <div class="ghiam_css">
+                        <button id="startRecordingBtn">Bắt đầu ghi âm</button><br/>
+                        <input type="text" id="input" placeholder="Nội dung được ghi âm" />
+                    </div>
+                    -->
+
+                    <a href="#">
+                        <button class="Btn">
+                            <svg height="1.2em" class="arrow" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path></svg>
+                            <!--<p class="text">Lên Trang Đầu</p>-->
+                        </button>
+                    </a>
+                    <style>
+                        .Btn {
+                              width: 45px;
+                              height: 45px;
+                              background: linear-gradient(#44ea76, #39fad7);
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              border-radius: 50%;
+                              cursor: pointer;
+                              position: fixed;
+                              border: none;
+                              margin-top:620px;
+                              margin-left: 1245px;
+                            }
+
+                            .arrow path {
+                              fill: white;
+                            }
+
+                            .text {
+                              font-size: 0.7em;
+                              width: 100px;
+                              position: absolute;
+                              color: black;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              bottom: -18px;
+                              opacity: 0;
+                              transition-duration: .7s;
+                              margin-top:10px;
+                            }
+
+                            .Btn:hover .text {
+                              opacity: 1;
+                              transition-duration: .7s;
+                            }
+
+                            .Btn:hover .arrow {
+                              animation: slide-in-bottom .7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                            }
+
+                            @@keyframes slide-in-bottom {
+                              0% {
+                                transform: translateY(10px);
+                                opacity: 0;
+                              }
+
+                              100% {
+                                transform: translateY(0);
+                                opacity: 1;
+                              }
+                            }
+                    </style>
+
+                    <a asp-controller="ChatAI" asp-action="Index">
+                    <img class="logo_gemini" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-gemini-icon.png" alt="" />
+                    <!--<p class="text" style="color: black">Lên Trang Đầu</p>-->
+                    </a>
+
+                    <style>
+                        .logo_gemini{
+                            position: fixed;
+                            width: 70px;
+                            height: 70px;
+                            margin-top: 300px;
+                            right:0;
+                            margin-right: 20px;
+
+                        }
+                    </style>
+
+                    <!-- ĐOẠN CODE NÀY DÀNH CHO MỞ MÁY TÍNH ĐỂ TÍNH TIỀN COFFEE -->
+
+                    <button style="top: 0;left: 0;position: fixed;width:50px; height:65px;border-radius:5px;margin-left:1445px;margin-top:500px; outline:none; background-color: transparent; border: none;" id="open_calculator">
+                        <img style="width:60px; height:60px;margin-left:-12.5px" src="~/assets/images/maytinh.png">
+                    </button>
+
+                    <div style="margin-left:580px" id="calculator_popup" class="calculator_popup">
+                        <div class="calculator_content">
+                            <div class="calculator_header">
+                                <div style="display: flex; flex-direction: row">
+                                    <h4
+                                        data-lang ="vi"
+                                        data-lang-en="Calculator - "
+                                        data-lang-vi="Máy Tính - "
+                                        data-lang-de="Kalkulator - "
+                                        data-lang-kr="계산자 - "
+                                        data-lang-jp="電卓 - "
+                                        >
+                                    </h4>
+                                    <h4 style="color: red; margin-left: 5px;"> TDPhoneS</h4>
+                                </div>
+                                <button id="close_calculator">&times;</button>
+                            </div>
+                            <div class="calculator-body">
+                                <input type="text" id="calc_display" readonly>
+                                <div class="calculator_buttons">
+                                    <button class="calc_button" onclick="appendToDisplay('7')">7</button>
+                                    <button class="calc_button" onclick="appendToDisplay('8')">8</button>
+                                    <button class="calc_button" onclick="appendToDisplay('9')">9</button>
+                                    <button class="calc_button operator" onclick="appendToDisplay('+')">+</button>
+                                    <button class="calc_button" onclick="appendToDisplay('4')">4</button>
+                                    <button class="calc_button" onclick="appendToDisplay('5')">5</button>
+                                    <button class="calc_button" onclick="appendToDisplay('6')">6</button>
+                                    <button class="calc_button operator" onclick="appendToDisplay('-')">-</button>
+                                    <button class="calc_button" onclick="appendToDisplay('1')">1</button>
+                                    <button class="calc_button" onclick="appendToDisplay('2')">2</button>
+                                    <button class="calc_button" onclick="appendToDisplay('3')">3</button>
+                                    <button class="calc_button operator" onclick="appendToDisplay('*')">*</button>
+                                    <button class="calc_button" onclick="appendToDisplay('0')">0</button>
+                                    <button class="calc_button" onclick="appendToDisplay('.')">.</button>
+                                    <button class="calc_button operator" onclick="calculate()">=</button>
+                                    <button class="calc_button operator" onclick="appendToDisplay('/')">/</button>
+                                    <button class="calc_button clear" onclick="clearDisplay()">C</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ĐOẠN CODE NÀY DÀNH CHO MỞ MÁY TÍNH ĐỂ TÍNH TIỀN COFFEE -->
+
+                    <button style="position: fixed; right: 0; margin-right: 5px; margin-top: 400px; outline:none; background-color: transparent; border: none;" id="open_chatai">
+                        <img style="width: 70px;" src="~/assets/images/gemini_popup.png" />
+                    </button>
+
+                    <div class="full_popup_chatai" id="full_popup_chatai" style="background-color: none; box-shadow: none;">
+                        <div class="container chat-container">
+                            <h1 style="font-size: 30px;" class="text-center">
+                                <img style="width: 60px;" src="https://jungleworks.com/wp-content/uploads/2021/04/1_9I6EIL5NG20A8se5afVmOg.gif" />Chatbot AI - <span style="color: red; font-weight: bold;">TDPhoneS</span>
+                            <button style="outline:none; background-color: transparent; border: none;" id="close_chatai">
+                                <img style="width: 30px; margin-left: 40px; margin-top: -20px;" src="https://cdn-icons-png.flaticon.com/512/51/51517.png" />
+                                </button>
+                            </h1>
+                            <div class="chat-box" id="chat-box"></div>
+                            <div class="input-box text-center">
+                                <input type="text" id="question" class="form-control d-inline" placeholder="" onkeypress="handleKeyPress(event)">
+                                <!--<input type="submit" class="btn d-inline" value="Send" onclick="sendQuestion()">-->
+                                <button type="submit" class="btn d-inline" value="Send" onclick="sendQuestion()"
+                                        data-lang="vi"
+                                        data-lang-en="Send"
+                                        data-lang-vi="Gửi"
+                                        data-lang-de="Senden"
+                                        data-lang-kr="보내다"
+                                        data-lang-jp="送信"
+                                        style="background-color: #87ceeb; border-radius: 20px; color: white;">
+                                </button>
+                            </div>
+                            <div class="button-box text-center">
+                                <button onclick="clearChat()"
+                                        data-lang="vi"
+                                        data-lang-en="Clear"
+                                        data-lang-vi="Xóa"
+                                        data-lang-de="Klar"
+                                        data-lang-kr="분명한"
+                                        data-lang-jp="クリア">
+                                </button>
+                                <button onclick="downloadChat()"
+                                        data-lang="vi"
+                                        data-lang-en="Download Chat"
+                                        data-lang-vi="Tải xuống cuộc trò chuyện"
+                                        data-lang-de="Chat-Download"
+                                        data-lang-kr="채팅 다운로드"
+                                        data-lang-jp="チャットダウンロード">
+                                </button>
+                                <button onclick="showAllChat()"
+                                        data-lang="vi"
+                                        data-lang-en="Show All Chat"
+                                        data-lang-vi="Hiển thị tất cả trò chuyện"
+                                        data-lang-de="Alle Chats anzeigen"
+                                        data-lang-kr="모든 채팅 표시"
+                                        data-lang-jp="すべて表示 チャット">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.getElementById("open_chatai").addEventListener("click", function () {
+                            document.getElementById("full_popup_chatai").style.display = "block";
+                        });
+
+                        document.getElementById("close_chatai").addEventListener("click", function () {
+                            document.getElementById("full_popup_chatai").style.display = "none";
+                        });
+                    </script>
+
+
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/language.js"></script>
+    <script src="~/js/ghiam.js"></script>
+    <script src="~/js/maytinhpopup.js"></script>
+    <script src="~/js/chatai_popup.js"></script>
+</header>

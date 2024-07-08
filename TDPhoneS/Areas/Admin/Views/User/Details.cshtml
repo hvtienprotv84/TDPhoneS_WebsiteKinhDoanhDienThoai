@@ -1,0 +1,89 @@
+﻿@model TDPhoneS.Models.DataModels.User
+
+@{
+    ViewData["Title"] = "Chi Tiết Người Dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+    <h4>Chi Tiết Người Dùng</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Họ
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            Tên
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt class="col-sm-2">
+            Tên Người Dùng
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt class="col-sm-2">
+            Mật Khẩu
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt class="col-sm-2">
+            Quyền
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @(string.IsNullOrEmpty(Model.Email) ? "<Not Included>" : Model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            Số Điện Thoại
+        </dt>
+        <dd class = "col-sm-10">
+            @(string.IsNullOrEmpty(Model.Phone) ? "<Not Included>" : Model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            Địa Chỉ
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            Ảnh Đại Diện
+        </dt>
+        <dd class="col-sm-10">
+            <img class="card-img" style="width:80px" width="250px" src="/Uploads/user/@Model.Avatar"
+                 onerror="this.onerror=null; this.src='/Uploads/user/default.png';" />
+        </dd>
+        <dt class="col-sm-2">
+            Ngày Tạo
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Created_Date != null ? Model.Created_Date.Value.ToString("dd / MM / yyyy hh:mm:ss") : "Null")
+        </dd>
+        <dt class="col-sm-2">
+            Ngày Cập Nhật
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Updated_Date != null ? Model.Updated_Date.Value.ToString("dd / MM / yyyy hh:mm:ss") : "Null")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-outline-success rounded-0" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index" class="btn btn-outline-secondary rounded-0">Trở Về Trang Danh Sách Người Dùng</a>
+</div>

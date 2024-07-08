@@ -1,0 +1,165 @@
+﻿@model TDPhoneS.Models.ViewModels.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var userFound = ViewBag.userFound;
+    var listCartByUser = @ViewBag.listCartByUser;
+    var subTotal = ViewBag.subTotal;
+}
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Proceed To Payment"
+                        data-lang-vi="Tiến Hành Thanh Toán"
+                        data-lang-de="Weiter zur Zahlung"
+                        data-lang-kr="결제를 진행하세요"
+                        data-lang-jp="支払いに進む">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<main class="container">
+    <div class="row g-5">
+        <!--Cart Goes Here-->
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-secondary"
+                      data-lang="vi"
+                      data-lang-en="Your Cart"
+                      data-lang-vi="Giỏ Hàng Của Bạn"
+                      data-lang-de="Ihr Warenkorb"
+                      data-lang-kr="장바구니"
+                      data-lang-jp="あなたのカート">
+                </span>
+                <span class="badge bg-secondary rounded">@ViewBag.listCartByUser.Count</span>
+            </h4>
+            <ul class="list-group mb-3">
+                @foreach (var item in listCartByUser)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">@item.Product.Name</h6>
+                            <small class="text-muted">@item.Product.Category.Name</small>
+                        </div>
+                        <span class="text-muted">
+                            @String.Format("{0:C}", item.Total)
+                        </span>
+                    </li>
+                    <div style="border: 2px red solid; display: flex; justify-content: center;">
+                        <span class="text-muted" style="padding: 10px;">
+                            <span style="color: black; padding-right:80px;"
+                                  data-lang="vi"
+                                  data-lang-en="Product Price: "
+                                  data-lang-vi="Giá Sản Phẩm: "
+                                  data-lang-de="Produktpreis: "
+                                  data-lang-kr="제품 가격: "
+                                  data-lang-jp="製品価格: ">
+                            </span>
+                            <span>@String.Format("{0:C}", item.Product.SalePrice)</span>
+                        </span>
+                    </div>
+                } 
+               
+                <li class="list-group-item d-flex justify-content-between">
+                    <span
+                       data-lang="vi"
+                       data-lang-en="Total Amount:"
+                       data-lang-vi="Tổng Tiền:"
+                       data-lang-de="Gesamtmenge:"
+                       data-lang-kr="총액:"
+                       data-lang-jp="合計金額：">
+                        </span>
+                    <span><strong>@String.Format("{0:C}", subTotal)</strong></span>
+                </li>
+            </ul>
+
+           
+        </div>
+
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3"
+                data-lang="vi"
+                data-lang-en="Billing address"
+                data-lang-vi="Địa Chỉ Thanh Toán"
+                data-lang-de="Rechnungsadresse"
+                data-lang-kr="지불 주소"
+                data-lang-jp="お支払い住所">
+            </h4>
+            <form method="post" asp-action="Checkout" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DeliverUser"
+                           data-lang="vi"
+                           data-lang-en="Recipient Name"
+                           data-lang-vi="Tên Người Nhận"
+                           data-lang-de="Name des Empfängers"
+                           data-lang-kr="수령인의 이름"
+                           data-lang-jp="受取人の氏名">
+                    </label>
+                    <input asp-for="DeliverUser" value="@userFound.LastName" class="form-control rounded-0" />
+                    <span class="text-danger" asp-validation-for="DeliverUser"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeliverAddress"
+                           data-lang="vi"
+                           data-lang-en="Delivery Address"
+                           data-lang-vi="Địa Chỉ Giao Hàng"
+                           data-lang-de="Lieferadresse"
+                           data-lang-kr="배달 주소"
+                           data-lang-jp="配送先住所">
+                    </label>
+                    <input asp-for="DeliverAddress" class="form-control rounded-0"/>
+                    <span class="text-danger" asp-validation-for="DeliverAddress"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeliverPhone"
+                           data-lang="vi"
+                           data-lang-en="Recipient Phone Number"
+                           data-lang-vi="Số Điện Thoại Người Nhận"
+                           data-lang-de="Telefonnummer des Empfängers"
+                           data-lang-kr="받는 사람 전화번호"
+                           data-lang-jp="受信者の電話番号">
+                    </label>
+                    <input asp-for="DeliverPhone" class="form-control rounded-0" />
+                    <span class="text-danger" asp-validation-for="DeliverPhone"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Note"
+                           data-lang="vi"
+                           data-lang-en="Note"
+                           data-lang-vi="Ghi Chú"
+                           data-lang-de="Notiz"
+                           data-lang-kr="메모"
+                           data-lang-jp="注記">
+                    </label>
+                    <input asp-for="Note" class="form-control rounded-0" />
+                    <span asp-validation-for="Note"></span>
+
+                </div>
+                <button class="w-100 btn btn-secondary rounded-0 btn-lg" type="submit"
+                        data-lang="vi"
+                        data-lang-en="Confirm Order"
+                        data-lang-vi="Xác Nhận Đặt Hàng"
+                        data-lang-de="Bestellbestätigung"
+                        data-lang-kr="주문 확인"
+                        data-lang-jp="注文の確認">
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+<script src="~/js/language.js"></script>
+<script src="/_framework/aspnetcore-browser-refresh.js"></script>

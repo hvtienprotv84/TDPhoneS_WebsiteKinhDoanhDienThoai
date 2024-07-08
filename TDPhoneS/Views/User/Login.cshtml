@@ -1,0 +1,95 @@
+﻿@model TDPhoneS.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Login"
+                        data-lang-vi="Đăng Nhập"
+                        data-lang-de="Anmeldung"
+                        data-lang-kr="로그인"
+                        data-lang-jp="ログイン">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+<div class="container">
+    <div class="row justify-content-around">
+        <form method="post" class="col-lg-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input name="returnUrl" value="@ViewBag.returnUrl" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Username"
+                       data-lang="vi"
+                       data-lang-en="Username"
+                       data-lang-vi="Tên Người Dùng"
+                       data-lang-de="Nutzername"
+                       data-lang-kr="사용자 이름"
+                       data-lang-jp="ユーザー名">
+                </label>
+                <input asp-for="Username" id="username" onchange="validating()" class="form-control rounded-0" />
+                <span asp-validation-for="Username" id="username_err" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"
+                       data-lang="vi"
+                       data-lang-en="Password"
+                       data-lang-vi="Mật Khẩu"
+                       data-lang-de="Passwort"
+                       data-lang-kr="비밀번호"
+                       data-lang-jp="パスワード">
+                </label>
+                <input asp-for="Password" id="password" onchange="validating()" class="form-control rounded-0" />
+                <span asp-validation-for="Password" id="password_err" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-secondary rounded-0 btn-block"
+                    data-lang="vi"
+                    data-lang-en="Login Now"
+                    data-lang-vi="Đăng Nhập Ngay"
+                    data-lang-de="jetzt einloggen"
+                    data-lang-kr="지금 로그인하십시오"
+                    data-lang-jp="ここでログイン">
+            </button>
+            <p 
+               data-lang="vi"
+               data-lang-en="Do Not Have An Account?"
+               data-lang-vi="Bạn Chưa Có Tài Khoản?"
+               data-lang-de="Haben Sie kein Konto?"
+               data-lang-kr="계정이 없나요?"
+               data-lang-jp="アカウントを持っていないのですか？"
+               style="display: inline;">
+             </p>
+            <a asp-controller="User" asp-action="Register" class="text-black"
+               data-lang="vi"
+               data-lang-en="Register Now"
+               data-lang-vi="Đăng ký ngay"
+               data-lang-de="Jetzt registrieren"
+               data-lang-kr="지금 등록하세요"
+               data-lang-jp="今すぐ登録">
+            </a>
+        </form>
+    </div>
+    
+</div>
+
+<script src="~/js/language.js"></script>
+
+@section Scripts {
+    <script type="text/javascript">
+        const validating = () => {
+            console.log("Oke Oke")
+        }
+    </script>
+}

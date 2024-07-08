@@ -1,0 +1,293 @@
+﻿@model TDPhoneS.Models.DataModels.Order
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 1;
+
+    var listProd = ViewBag.orderDetails;
+}
+<html>
+<head>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<link href="~/css/date_time.css" rel="stylesheet" />
+</head>
+
+<div id="data-table">
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Details Of Order: "
+                        data-lang-vi="Chi Tiết Đơn Đặt Hàng: "
+                        data-lang-de="Einzelheiten der Bestellung: "
+                        data-lang-kr="주문 세부정보: "
+                        data-lang-jp="注文の詳細: "
+                        style="display: inline;">
+                    </h2>
+                    <h2 style="display: inline;">#@Model.Id</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 
+                data-lang="vi"
+                data-lang-en="Order Informations"
+                data-lang-vi="Thông Tin Đơn Hàng"
+                data-lang-de="Informationszeile"
+                data-lang-kr="정보 라인"
+                data-lang-jp="情報ライン">
+            </h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <p
+                                data-lang="vi"
+                                data-lang-en="Number Order"
+                                data-lang-vi="Số Thứ Tự"
+                                data-lang-de="Numerische Ordnung"
+                                data-lang-kr="숫자순"
+                                data-lang-jp="番号順">
+                            </p>
+                        </th>
+                        <td>#@Model.Id</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p
+                                data-lang="vi"
+                                data-lang-en="Order Date"
+                                data-lang-vi="Ngày Đặt Hàng"
+                                data-lang-de="Auftragsdatum"
+                                data-lang-kr="주문일"
+                                data-lang-jp="注文日">
+                            </p>
+                        </th>
+                        <td>@Model.Created_Date</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p 
+                               data-lang="vi"
+                               data-lang-en="Total Amount:"
+                               data-lang-vi="Tổng Tiền:"
+                               data-lang-de="Gesamtmenge:"
+                               data-lang-kr="총액:"
+                               data-lang-jp="合計金額：">
+                            </p>
+                        </th>
+                        <td>@String.Format("{0:C}", Model.TotalPrice)</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p 
+                               data-lang="vi"
+                               data-lang-en="Order Status"
+                               data-lang-vi="Trạng Thái Đơn Hàng"
+                               data-lang-de="Bestellstatus"
+                               data-lang-kr="주문 상태"
+                               data-lang-jp="注文の状況">
+                            </p>
+                        </th>
+                        <td>
+                            @Model.Status
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+        <div class="col-md-6">
+            <h3 
+                data-lang="vi"
+                data-lang-en="Shipping Information"
+                data-lang-vi="Thông Tin Giao Hàng"
+                data-lang-de="Versanddetails"
+                data-lang-kr="배송 세부정보"
+                data-lang-jp="発送詳細">
+            </h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <p 
+                               data-lang="vi"
+                               data-lang-en="Full Name"
+                               data-lang-vi="Họ và Tên"
+                               data-lang-de="Vollständiger Name"
+                               data-lang-kr="성명"
+                               data-lang-jp="フルネーム">
+                            </p>
+                        </th>
+                        <td>@Model.DeliverUser</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p
+                                data-lang ="vi"
+                                data-lang-en="Address"
+                                data-lang-vi="Địa Chỉ"
+                                data-lang-de="Adresse"
+                                data-lang-kr="주소"
+                                data-lang-jp="住所">
+                            </p>
+                        </th>
+                        <td>@Model.DeliverAddress</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p
+                                data-lang ="vi"
+                                data-lang-en="Phone Number"
+                                data-lang-vi="Số Điện Thoại"
+                                data-lang-de="Telefonnummer"
+                                data-lang-kr="전화 번호"
+                                data-lang-jp="電話番号">
+                            </p>
+                        </th>
+                        <td>@Model.DeliverPhone</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p
+                                data-lang="vi"
+                                data-lang-en="Note"
+                                data-lang-vi="Ghi Chú"
+                                data-lang-de="Notiz"
+                                data-lang-kr="메모"
+                                data-lang-jp="注記">
+                            </p>
+                        </th>
+                        <td>@Model.Note</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <br />
+    <h4 
+        data-lang="vi"
+        data-lang-en="Product Of The Order"
+        data-lang-vi="Sản Phẩm Của Đơn Đặt Hàng"
+        data-lang-de="Produkt der Bestellung"
+        data-lang-kr="주문상품"
+        data-lang-jp="ご注文の商品">
+    </h4>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <p
+                       data-lang ="vi"
+                       data-lang-en="Item Quantity"
+                       data-lang-vi="Số Lượng Mặt Hàng"
+                       data-lang-de="Anzahl der Teile"
+                       data-lang-kr="항목 수"
+                       data-lang-jp="アイテム数">
+                    </p>
+                </th>
+                <th>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Product Name"
+                       data-lang-vi="Tên Sản Phẩm"
+                       data-lang-de="Name des Produkts"
+                       data-lang-kr="제품명"
+                       data-lang-jp="製品名">
+                    </p>
+                </th>
+                <th>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Quantity"
+                       data-lang-vi="Số Lượng"
+                       data-lang-de="Quantität"
+                       data-lang-kr="수량"
+                       data-lang-jp="数量">
+                    </p>
+                </th>
+                <th>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Product Price"
+                       data-lang-vi="Giá Sản Phẩm"
+                       data-lang-de="Produktpreis"
+                       data-lang-kr="제품 가격"
+                       data-lang-jp="製品価格">
+                    </p>
+                </th>
+                <th>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Total Product Price"
+                       data-lang-vi="Tổng Giá Sản Phẩm"
+                       data-lang-de="Gesamtproduktpreis"
+                       data-lang-kr="총 제품 가격"
+                       data-lang-jp="製品の合計価格">
+                    </p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in listProd)
+            {
+                <tr>
+                    <td class="text-center">@i</td>
+                    <td>@item.Product?.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Product?.SalePrice > 0 ? String.Format("{0:C}", item.Product?.SalePrice) : String.Format("{0:C}", item.Product?.Price))</td>
+                    <td>@(String.Format("{0:C}", item.TotalPrice))</td>
+                </tr>
+                i++;
+            }
+
+
+        </tbody>
+    </table>
+     <div class="clock" id="clock"></div>
+</div>
+</div>
+<button style="background-color: transparent ;font-weight:bold;color:black;border: 3px dashed black; font-size:18px; display: flex; text-align: center; margin: 0 auto;"
+        class="btn btn-primary" onclick="captureAndSave()">
+    <img style="width:25px;height:25px;" src="https://img.icons8.com/?size=100&id=11772&format=png&color=000000">
+    <span style="margin-left: 5px;"
+          data-lang="vi"
+          data-lang-en="Export Invoice Photos"
+          data-lang-vi="Xuất Ảnh Hóa Đơn"
+          data-lang-de="Rechnungsbild exportieren"
+          data-lang-kr="송장 이미지 내보내기"
+          data-lang-jp="請求書の画像をエクスポート">
+    </span>
+</button>
+
+<script>
+    function captureAndSave() {
+        // Lấy phần tử bao
+        var wrapperElement = document.getElementById('data-table');
+
+        // Chụp ảnh của phần tử bao
+        html2canvas(wrapperElement).then(function (canvas) {
+            // Chuyển đổi ảnh từ Canvas thành blob
+            canvas.toBlob(function (blob) {
+                // Sử dụng FileSaver.js để tạo và tải xuống ảnh
+                saveAs(blob, 'hoadon.png');
+            });
+        });
+    }
+</script>
+</html>
+<script src="~/js/date_time.js"></script>
+<script src="~/js/language.js"></script>

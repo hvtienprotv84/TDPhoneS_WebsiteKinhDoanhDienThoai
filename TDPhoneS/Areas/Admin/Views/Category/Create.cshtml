@@ -1,0 +1,50 @@
+﻿@model TDPhoneS.Models.DataModels.Category
+
+@{
+    ViewData["Title"] = "Tạo Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h4>Tạo Danh Mục</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Tên Danh Mục</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Hình Ảnh Danh Mục</label>
+                <input type="file" class="form-control" name="fileUpload" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Trạng Thái</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="1">Hiển Thị</option>
+                    <option value="0">Ẩn</option>
+                </select>
+
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <!--<input type="submit" value="Create" class="btn btn-primary btn-block rounded-0" />-->
+                <input type="submit" value="Tạo Danh Mục" class="btn btn-primary btn-block rounded-0" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-secondary rounded-0">Trở Về Trang Danh Sách Danh Mục</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

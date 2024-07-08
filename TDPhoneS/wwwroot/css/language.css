@@ -1,0 +1,36 @@
+﻿.language_logo button {
+    background-color: #8fffcf;
+    border: 2px red dashed;
+    border-radius: 10px;
+}
+
+.language_logo img {
+    width: 100px;
+    height: 100px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+
+.id_language {
+    font-weight: bold;
+    color: black;
+    font-family: cursive;
+    margin-top: -25px;
+    position: absolute;
+    margin-left: -38px;
+}
+
+
+#container_language_logo{
+    margin-left: -12px;
+
+}
+
+.container_button_language{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

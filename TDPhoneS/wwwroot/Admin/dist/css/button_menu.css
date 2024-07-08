@@ -1,0 +1,322 @@
+﻿
+.main_back2 {
+    position: absolute;
+    border-radius: 10px;
+    transform: rotate(90deg);
+    width: 11em;
+    height: 11em;
+    background: linear-gradient(270deg, #03a9f4, #cc39a4, #ffb5d2);
+    z-index: -2;
+    box-shadow: inset 0px 0px 180px 5px #ffffff;
+}
+
+.main2 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 14em;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    margin-top: -70px;
+    margin-left: 500px;
+    border-radius: inherit;
+}
+
+.card2 {
+    width: 60px;
+    height: 60px;
+    /**border-top-left-radius: 10px;*/
+    background: lightgrey;
+    transition: .4s ease-in-out, .2s background-color ease-in-out, .2s background-image ease-in-out;
+    background: red;
+    backdrop-filter: blur(5px);
+    border: 1px solid transparent;
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .card2 .instagram {
+        opacity: 0;
+        transition: .2s ease-in-out;
+        fill: #cc39a4;
+    }
+
+    .card2:nth-child(2) {
+        border-radius: 0px;
+    }
+
+        .card2:nth-child(2) .twitter {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: #03A9F4;
+        }
+
+    .card2:nth-child(3) {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 0px;
+    }
+
+        .card2:nth-child(3) .dribble {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: #ffb5d2;
+        }
+
+    .card2:nth-child(4) {
+        border-radius: 0px;
+    }
+
+        .card2:nth-child(4) .codepen {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: black;
+        }
+
+    .card2:nth-child(5) {
+        border-radius: 0px;
+    }
+
+        .card2:nth-child(5) .uiverse {
+            position: absolute;
+            margin-left: 0.2em;
+            margin-top: 0.2em;
+            opacity: 0;
+            transition: .2s ease-in-out;
+        }
+
+    .card2:nth-child(6) {
+        border-radius: 0px;
+    }
+
+        .card2:nth-child(6) .discord {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: #8c9eff;
+        }
+
+    .card2:nth-child(7) {
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 0px;
+    }
+
+        .card2:nth-child(7) .github {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: black;
+        }
+
+    .card2:nth-child(8) {
+        border-radius: 0px;
+    }
+
+        .card2:nth-child(8) .telegram {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            fill: #29b6f6;
+        }
+
+    .card2:nth-child(9) {
+        border-bottom-right-radius: 10px;
+        border-top-left-radius: 0px;
+    }
+
+        .card2:nth-child(9) .reddit {
+            opacity: 0;
+            transition: .2s ease-in-out;
+        }
+
+.main2:hover {
+    width: 14em;
+    cursor: pointer;
+}
+
+    .main2:hover .main_back2 {
+        opacity: 0;
+    }
+
+    .main2:hover .card2 {
+        margin: .2em;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+        .main2:hover .card2:nth-child(5) {
+            border: transparent;
+        }
+
+    .main2:hover .text {
+        opacity: 0;
+        z-index: -3;
+    }
+
+    .main2:hover .instagram {
+        opacity: 1;
+    }
+
+    .main2:hover .twitter {
+        opacity: 1;
+    }
+
+    .main2:hover .dribble {
+        opacity: 1;
+    }
+
+    .main2:hover .codepen {
+        opacity: 1;
+    }
+
+    .main2:hover .uiverse {
+        opacity: 1;
+    }
+
+    .main2:hover .discord {
+        opacity: 1;
+    }
+
+    .main2:hover .github {
+        opacity: 1;
+    }
+
+    .main2:hover .telegram {
+        opacity: 1;
+    }
+
+    .main2:hover .reddit {
+        opacity: 1;
+    }
+
+.card2:nth-child(1):hover {
+    background-color: #cc39a4;
+}
+
+    .card2:nth-child(1):hover .instagram {
+        fill: white;
+    }
+
+.card2:nth-child(2):hover {
+    background-color: #03A9F4;
+}
+
+    .card2:nth-child(2):hover .twitter {
+        fill: white;
+    }
+
+.card2:nth-child(3):hover {
+    background-color: #ffb5d2;
+}
+
+    .card2:nth-child(3):hover .dribble {
+        fill: white;
+    }
+
+.card2:nth-child(4):hover {
+    background-color: #1E1F26;
+}
+
+    .card2:nth-child(4):hover .codepen {
+        fill: white;
+    }
+
+.card2:nth-child(5):hover {
+    animation: backgroundIMG .1s;
+    animation-fill-mode: forwards;
+}
+
+    .card2:nth-child(5):hover .uiverse #paint0_linear_501_142 stop {
+        stop-color: white;
+    }
+
+    .card2:nth-child(5):hover .uiverse #paint1_linear_501_142 stop {
+        stop-color: white;
+    }
+
+    .card2:nth-child(5):hover .uiverse #paint2_linear_501_142 stop {
+        stop-color: white;
+    }
+
+@keyframes backgroundIMG {
+    100% {
+        background-image: linear-gradient(#BF66FF,#6248FF,#00DDEB);
+    }
+}
+
+.card2:nth-child(6):hover {
+    background-color: #8c9eff;
+}
+
+    .card2:nth-child(6):hover .discord {
+        fill: white;
+    }
+
+.card2:nth-child(7):hover {
+    background-color: black;
+}
+
+    .card2:nth-child(7):hover .github {
+        fill: white;
+    }
+
+.card2:nth-child(8):hover {
+    background-color: #29b6f6;
+}
+
+    .card2:nth-child(8):hover .telegram > path:nth-of-type(1) {
+        fill: white;
+    }
+
+    .card2:nth-child(8):hover .telegram > path:nth-of-type(2) {
+        fill: #29b6f6;
+    }
+
+    .card2:nth-child(8):hover .telegram > path:nth-of-type(3) {
+        fill: #29b6f6;
+    }
+
+.card2:nth-child(9):hover {
+    background-color: rgb(255,69,0);
+}
+
+.card2:nth-child(9) .reddit > g circle {
+    fill: rgb(255,69,0);
+}
+
+.card2:nth-child(9) .reddit > g path {
+    fill: black;
+}
+
+.text {
+    position: absolute;
+    font-size: 24px;
+    transition: .4s ease-in-out;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.33em;
+    z-index: 3;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: -80px;
+}
+
+
+#icon_control_menu {
+    position: absolute;
+    font-size: 90px;
+    margin-left: -45px;
+    animation: spin 2s linear infinite;
+    margin-top: 2px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+

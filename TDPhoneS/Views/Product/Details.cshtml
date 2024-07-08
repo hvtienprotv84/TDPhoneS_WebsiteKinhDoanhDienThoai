@@ -1,0 +1,577 @@
+﻿@model TDPhoneS.Models.DataModels.Review
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Product Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var userFound = ViewBag.userFound;
+}
+
+@section Styles {
+    <style>
+        .be-comment-block {
+            margin-bottom: 50px !important;
+            border: 1px solid #edeff2;
+            border-radius: 2px;
+            padding: 50px 70px;
+            border: 1px solid #ffffff;
+        }
+
+        .comments-title {
+            font-size: 16px;
+            color: #262626;
+            margin-bottom: 15px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+
+        .be-img-comment {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-bottom: 15px;
+        }
+
+        .be-ava-comment {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .be-comment-content {
+            margin-left: 80px;
+        }
+
+            .be-comment-content span {
+                display: inline-block;
+                width: 49%;
+                margin-bottom: 15px;
+            }
+
+        .be-comment-name {
+            font-size: 13px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+
+        .be-comment-content a {
+            color: #383b43;
+        }
+
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+
+        .be-comment-time {
+            text-align: right;
+        }
+
+        .be-comment-time {
+            font-size: 11px;
+            color: #b4b7c1;
+        }
+
+        .be-comment-text {
+            font-size: 13px;
+            line-height: 18px;
+            color: #7a8192;
+            display: block;
+            background: #f6f6f7;
+            border: 1px solid #edeff2;
+            padding: 15px 20px 20px 20px;
+        }
+
+        .form-group.fl_icon .icon {
+            position: absolute;
+            top: 1px;
+            left: 16px;
+            width: 48px;
+            height: 48px;
+            background: #f6f6f7;
+            color: #b5b8c2;
+            text-align: center;
+            line-height: 50px;
+            -webkit-border-top-left-radius: 2px;
+            -webkit-border-bottom-left-radius: 2px;
+            -moz-border-radius-topleft: 2px;
+            -moz-border-radius-bottomleft: 2px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .form-group .form-input {
+            font-size: 13px;
+            line-height: 50px;
+            font-weight: 400;
+            color: #b4b7c1;
+            width: 100%;
+            height: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 1px solid #edeff2;
+            border-radius: 3px;
+        }
+
+        .form-group.fl_icon .form-input {
+            padding-left: 70px;
+        }
+
+        .form-group textarea.form-input {
+            height: 150px;
+        }
+    </style>
+}
+
+<div class="page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Product Details: @ViewBag.product.Name"
+                        data-lang-vi="Chi Tiết Sản Phẩm: @ViewBag.product.Name"
+                        data-lang-de="Produktdetails: @ViewBag.product.Name"
+                        data-lang-kr="제품 세부 정보: @ViewBag.product.Name"
+                        data-lang-jp="製品詳細: @ViewBag.product.Name">
+                        </h2>
+                    <!--<h2>Details of: @ViewBag.product.Name</h2>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Product Area Starts ***** -->
+<section class="section" id="product">
+    <div class="container">
+
+        <span class="text-muted font-weight-bold">Id: @ViewBag.product.Id</span>
+
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="left-images">
+                    <img src="~/Uploads/product/@ViewBag.product.Image" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="right-content">
+                    <h4>@ViewBag.product.Name</h4>
+                    @if (ViewBag.product.SalePrice > 0)
+                    {
+                        <span class="price text-success">$ @ViewBag.product.SalePrice - <del class="text-secondary">$ @ViewBag.product.Price</del></span>
+                    }
+                    else
+                    {
+                        <span class="price">$ @ViewBag.product.Price </span>
+                    }
+                    <ul class="stars">
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                    </ul>
+                    <span class="d-inline-block">
+                        <span 
+                              data-lang="vi"
+                              data-lang-en="Status:"
+                              data-lang-vi="Trạng Thái:"
+                              data-lang-de="Zustand:"
+                              data-lang-kr="상태:"
+                              data-lang-jp="状態:"
+                              style="display: inline">
+                          </span>
+                        @if (ViewBag.product.Status == 1)
+                        {
+                            <span class="text-success d-inline"
+                                  data-lang="vi"
+                                  data-lang-en=" In Stock"
+                                  data-lang-vi=" Còn Hàng"
+                                  data-lang-de=" Auf Lager"
+                                  data-lang-kr=" 재고 있음"
+                                  data-lang-jp=" 在庫あり">
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger d-inline"
+                                  data-lang="vi"
+                                  data-lang-en="Out Of Stock"
+                                  data-lang-vi="Hết Hàng"
+                                  data-lang-de="Ausverkauft"
+                                  data-lang-kr="품절"
+                                  data-lang-jp="在庫切れ">
+                              </span>
+                        }
+                    </span>
+                    <div style="display: flex; flex-direction: row; justify-content: left; align-items: center; margin-top: 10px;">
+                        <p
+                           data-lang="vi"
+                           data-lang-en="Category: "
+                           data-lang-vi="Danh Mục: "
+                           data-lang-de="Kategorie: "
+                           data-lang-kr="범주: "
+                           data-lang-jp="分類: "
+                           style="margin-top: 0px; margin-bottom: 0px;">
+                        </p>
+                        <a style="margin-left: 5px" asp-controller="Product" asp-action="Index" asp-route-cateId="@ViewBag.product.Category.Id"> @ViewBag.product.Category.Name</a>
+                     </div>
+                    <!--
+                    <p>
+                        Category: <a asp-controller="Product" asp-action="Index" asp-route-cateId="@ViewBag.product.Category.Id">@ViewBag.product.Category.Name</a>
+                    </p>
+                    -->
+                    <div class="quote">
+                        <i class="fa fa-quote-left"></i><p>@ViewBag.product.Descriptions</p>
+                    </div>
+                    @if (userFound != null)
+                    {
+                        @if (@ViewBag.product.Status == 0)
+                        {   
+                            <br/>
+                            <a asp-controller="Product" asp-action="Index"
+                               data-lang="vi"
+                               data-lang-en="This Product Is Out Of Stock!"
+                               data-lang-vi="Sản Phẩm Này Đã Hết Hàng!"
+                               data-lang-de="Diese Ware ist nicht mehr auf Lager!"
+                               data-lang-kr="이 제품은 품절입니다!"
+                               data-lang-jp="この商品は在庫切れです!"
+                               style="color: black; font-weight: bold; font-size: 18px;">
+                            </a>
+                        } else
+                        {
+                            <form asp-controller="Cart" asp-action="AddToCart">
+                                <div class="quantity-content">
+                                    <div class="left-content">
+                                        <h6 
+                                            data-lang="vi"
+                                            data-lang-en="Order Quantity"
+                                            data-lang-vi="Số Lượng Đặt Hàng"
+                                            data-lang-de="Anzahl der Aufträge"
+                                            data-lang-kr="주문수"
+                                            data-lang-jp="注文数">
+                                        </h6>
+                                    </div>
+                                    <div class="right-content">
+                                        <div class="quantity buttons_added">
+                                            <input type="hidden" name="accId" value="@userFound.Id" />
+                                            <input type="hidden" name="prodId" value="@ViewBag.product.Id" />
+                                            <div style="display: flex;flex-direction: row;margin: 0 auto;justify-content: center;align-items: center;text-align: center;">
+                                                <input style="margin-right: 10px" type="button" value="-" class="minus" onclick="handleMinus();">
+                                                <input type="number" step="1" min="1" max="" name="quantity" value="1" id="quantity" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><span style="position: absolute;margin-top: -1px;">1</span>
+                                                <input style="margin-left: 10px" type="button" value="+" class="plus" onclick="handlePlus();">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-secondary btn-sm btn-block main-button-border rounded-0 mt-3" type="submit"
+                                                data-lang="vi"
+                                                data-lang-en="Add To Cart"
+                                                data-lang-vi="Thêm Vào Giỏ Hàng"
+                                                data-lang-de="In den Warenkorb legen"
+                                                data-lang-kr="장바구니에 추가"
+                                                data-lang-jp="カートに追加">
+                                        Add To Cart
+                                        </button>
+                                        </div>
+                                </div>
+                            </form>
+                        }
+                        
+
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-secondary btn-sm btn-block main-button-border rounded-0 mt-3" asp-controller="User" asp-action="Login"
+                           data-lang="vi"
+                           data-lang-en="Please Login To Buy Products!"
+                           data-lang-vi="Hãy Đăng Nhập Để Mua Sản Phẩm!"
+                           data-lang-de="Bitte anmelden, um Produkte zu kaufen!"
+                           data-lang-kr="제품을 구매하려면 로그인하세요!"
+                           data-lang-jp="製品を購入するにはログインしてください!">
+                    </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-body text-center">
+                    <h3 class="card-title"
+                        data-lang="vi"
+                        data-lang-en="Latest Comments (@ViewBag.reviewByProd.Count)"
+                        data-lang-vi="Bình luận mới nhất (@ViewBag.reviewByProd.Count)"
+                        data-lang-de="Neueste Kommentare (@ViewBag.reviewByProd.Count)"
+                        data-lang-kr="최신 댓글 (@ViewBag.reviewByProd.Count)"
+                        data-lang-jp="最新のコメント (@ViewBag.reviewByProd.Count)">
+                    </h3>
+                </div>
+                <div class="comment-widgets">
+                    @if (ViewBag.reviewByProd.Count > 0)
+                    {
+                        @foreach (var cmt in ViewBag.reviewByProd)
+                        {
+                            <!-- Comment Row -->
+                            <div class="d-flex flex-row comment-row m-t-0">
+                                <div class="p-2">
+                                    <img src="~/Uploads/user/@(string.IsNullOrEmpty(@cmt.User.Avatar) ? "default.png" : @cmt.User.Avatar)" alt="@cmt.User.LastName" width="50" class="rounded-circle">
+                                </div>
+                                <div class="comment-text w-100">
+                                    <h6 class="font-medium">@(cmt.User.FirstName + " " + cmt.User.LastName)</h6>
+                                    <p class="text-muted">@cmt.Title </p>
+
+                                    <span>@cmt.Subject </span>
+                                    
+                                    <div class="comment-footer">
+                                        @if (cmt.UserId == userFound?.Id)
+                                        {
+                                            <div class="row">
+
+                                                <!-- Button trigger modal -->
+                                                <button type="button" data-id="@cmt.Id" class="btn btn-outline-primary rounded-0 btn-sm" id="editComment" data-toggle="modal" data-target="#exampleModal"
+                                                        data-lang="vi"
+                                                        data-lang-en="Edit Comments"
+                                                        data-lang-vi="Chỉnh Sửa Bình Luận"
+                                                        data-lang-de="Kommentare bearbeiten"
+                                                        data-lang-kr="댓글 수정"
+                                                        data-lang-jp="コメントの編集">
+                                                </button>
+                                                <form asp-controller="Product" asp-action="DeleteComment" method="post">
+                                                    <input name="previousUrl" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Path" />
+                                                    <input name="Id" type="hidden" value="@cmt.Id" />
+                                                    <button type="submit" class="btn btn-danger rounded-0 btn-sm"
+                                                            data-lang="vi"
+                                                            data-lang-en="Delete Comments"
+                                                            data-lang-vi="Xoá Bình Luận"
+                                                            data-lang-de="Kommentare löschen"
+                                                            data-lang-kr="댓글 삭제"
+                                                            data-lang-jp="コメントを削除する">
+                                                </button>
+                                                </form>
+                                            </div>
+
+                                        }
+                                        <span class="text-muted float-right">
+                                            
+                                            @cmt.Created_Date.ToString("ddd, dd MMM yyyy") at @cmt.Created_Date.ToString("h:mm tt"), GMT @cmt.Created_Date.ToString("zzz")
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            data-lang="vi"
+                                            data-lang-en="Edit Comments"
+                                            data-lang-vi="Chỉnh Sửa Bình Luận"
+                                            data-lang-de="Kommentare bearbeiten"
+                                            data-lang-kr="댓글 수정"
+                                            data-lang-jp="コメントの編集">
+                                            </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-block mt-3" asp-controller="Product" asp-action="UpdateComment" method="post">
+                                            <input name="previousUrl" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Path" />
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="Id" name="Id" id="CmtId" />
+                                            <input type="hidden" asp-for="ProductId" name="ProductId" id="ProductId" />
+                                            <input type="hidden" asp-for="UserId" name="UserId" id="UserId" />
+                                            <input type="hidden" asp-for="Created_Date" name="Created_Date" id="Created_Date" />
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group fl_icon">
+                                                        <p class="text-danger" asp-validation-for="Title"
+                                                           data-lang="vi"
+                                                           data-lang-en="Title"
+                                                           data-lang-vi="Tiêu Đề"
+                                                           data-lang-de="Titel"
+                                                           data-lang-kr="제목"
+                                                           data-lang-jp="タイトル">
+                                                        </p>
+                                                        <div class="icon" style="margin-top: 25px;">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </div>
+                                                        <input class="form-input rounded-0" type="text" placeholder="" id="CmtTitle" asp-for="Title">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <span class="text-danger" asp-validation-for="Subject" 
+                                                          data-lang="vi"
+                                                          data-lang-en="Subject"
+                                                          data-lang-vi="Nội Dung"
+                                                          data-lang-de="Thema"
+                                                          data-lang-kr="주제"
+                                                          data-lang-jp="主題">
+                                                     </span>
+                                                    <textarea class="form-control rounded-0" rows="6" placeholder="" id="CmtSubject" asp-for="Subject"></textarea>
+
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-outline-secondary mt-2 rounded-0"
+                                                    data-lang="vi"
+                                                    data-lang-en="Submit"
+                                                    data-lang-vi="Gửi"
+                                                    data-lang-de="Senden"
+                                                    data-lang-kr="보내다"
+                                                    data-lang-jp="送信">
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                data-lang="vi"
+                                                data-lang-en="Close"
+                                                data-lang-vi="Đóng"
+                                                data-lang-de="Nahe"
+                                                data-lang-kr="닫다"
+                                                data-lang-jp="近い">
+                                        Close
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Be The First To Comment!"
+                           data-lang-vi="Hãy Là Người Đầu Tiên Bình Luận!"
+                           data-lang-de="Sei der erste der kommentiert!"
+                           data-lang-kr="가장 먼저 댓글을 달아주세요!"
+                           data-lang-jp="最初にコメントしてみませんか!">
+                        </p>
+                    }
+
+
+
+                    @if (userFound != null)
+                    {
+                        <form class="form-block mt-3" asp-controller="Product" asp-action="PostComment" method="post">
+                            <input name="previousUrl" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Path" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="ProductId" value="@ViewBag.product.Id" />
+                            <input type="hidden" asp-for="UserId" value="@userFound.Id" />
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group fl_icon">
+                                        <p class="text-danger" asp-validation-for="Title"
+                                           data-lang="vi"
+                                           data-lang-en="Title"
+                                           data-lang-vi="Tiêu Đề"
+                                           data-lang-de="Titel"
+                                           data-lang-kr="제목"
+                                           data-lang-jp="タイトル">
+                                        </p>
+                                        <div class="icon" style="margin-top: 25px;">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <input class="form-input rounded-0" type="text" placeholder="" asp-for="Title">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <span class="text-danger" asp-validation-for="Subject"
+                                          data-lang="vi"
+                                          data-lang-en="Subject"
+                                          data-lang-vi="Nội Dung"
+                                          data-lang-de="Thema"
+                                          data-lang-kr="주제"
+                                          data-lang-jp="主題">
+                                    </span>
+                                    <textarea class="form-control rounded-0" rows="6" placeholder="" asp-for="Subject"></textarea>
+                                    <!--<span class="text-danger" asp-validation-for="Subject"></span>-->
+
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-secondary mt-2 rounded-0" data-lang="vi"
+                                    data-lang-en="Submit"
+                                    data-lang-vi="Gửi"
+                                    data-lang-de="Senden"
+                                    data-lang-kr="보내다"
+                                    data-lang-jp="送信">
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-secondary btn-sm btn-block main-button-border rounded-0 mt-3" asp-controller="User" asp-action="Login"
+                           data-lang="vi"
+                           data-lang-en="Login To Posting Your Comment !"
+                           data-lang-vi="Đăng nhập để gửi bình luận của bạn!"
+                           data-lang-de="Melden Sie sich an, um Ihren Kommentar zu veröffentlichen!"
+                           data-lang-kr="귀하의 의견을 게시하려면 로그인하십시오!"
+                           data-lang-jp="コメントを投稿するにはログインしてください!">
+                        </a>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<script src="~/js/language.js"></script>
+
+<!-- ***** Product Area Ends ***** -->
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#editComment").click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetComment")', // to get the right path to controller from TableRoutes of Asp.Net MVC
+                    dataType: "json", //to work with json format
+                    type: "GET", //to do a post request
+                    contentType: 'application/json; charset=utf-8', //define a contentType of your request
+                    cache: false, //avoid caching results
+                    async: true,
+                    data: { id: $(this).attr('data-id') }, // here you can pass arguments to your request if you need
+                    success: function (data) {
+                        console.log(data);
+                        $("#CmtId").val(data.id);
+                        $("#CmtTitle").val(data.title);
+                        $("#CmtSubject").val(data.subject);
+                        $("#ProductId").val(data.productId);
+                        $("#UserId").val(data.userId);
+                        $("#Created_Date").val(data.created_Date);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+
+
+        var quantityDOM = document.getElementById("quantity");
+
+        const handleMinus = () => {
+            quantityDOM.value <= 1 ? 1 : quantityDOM.value--;
+            console.log(quantityDOM.value);
+        }
+
+        const handlePlus = () => {
+            quantityDOM.value >= 50 ? quantityDOM.value : quantityDOM.value++;
+            console.log(quantityDOM.value);
+        }
+    </script>
+}

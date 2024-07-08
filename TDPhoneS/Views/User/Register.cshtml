@@ -1,0 +1,152 @@
+﻿@model TDPhoneS.Models.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Register"
+                        data-lang-vi="Đăng Ký"
+                        data-lang-de="Registrieren"
+                        data-lang-kr="등록하다"
+                        data-lang-jp="登録する">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+<div class="container-fluid">
+    <div class="row justify-content-around">
+        <form method="post" asp-action="Register" class="col-lg-8">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input name="returnUrl" value="@ViewBag.returnUrl" type="hidden" />
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label asp-for="FirstName" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="First Name"
+                           data-lang-vi="Họ"
+                           data-lang-de="Vorname"
+                           data-lang-kr="이름"
+                           data-lang-jp="ファーストネーム">
+                    </label>
+                    <input asp-for="FirstName" class="form-control rounded-0" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label asp-for="LastName" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="Last Name"
+                           data-lang-vi="Tên"
+                           data-lang-de="Familienname, Nachname"
+                           data-lang-kr="성"
+                           data-lang-jp="苗字">
+                    </label>
+                    <input asp-for="LastName" class="form-control rounded-0" autocomplete="off" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label asp-for="Username" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="Username"
+                           data-lang-vi="Tên Người Dùng"
+                           data-lang-de="Nutzername"
+                           data-lang-kr="사용자 이름"
+                           data-lang-jp="ユーザー名">
+                    </label>
+                    <input asp-for="Username" class="form-control rounded-0" autocomplete="off" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label asp-for="Password" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="Password"
+                           data-lang-vi="Mật Khẩu"
+                           data-lang-de="Passwort"
+                           data-lang-kr="비밀번호"
+                           data-lang-jp="パスワード">
+                    </label>
+                    <input asp-for="Password" class="form-control rounded-0" autocomplete="off" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label asp-for="Email" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="Email"
+                           data-lang-vi="Email"
+                           data-lang-de="E-Mail"
+                           data-lang-kr="이메일"
+                           data-lang-jp="Eメール">
+                    </label>
+                    <input asp-for="Email" class="form-control rounded-0" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label asp-for="Phone" class="control-label"
+                           data-lang="vi"
+                           data-lang-en="Phone Number"
+                           data-lang-vi="Số Điện Thoại"
+                           data-lang-de="Telefonnummer"
+                           data-lang-kr="전화 번호"
+                           data-lang-jp="電話番号">
+                    </label>
+                    <input asp-for="Phone" class="form-control rounded-0" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-secondary rounded-0 btn-block"
+                    data-lang="vi"
+                    data-lang-en="Register Now"
+                    data-lang-vi="Đăng ký ngay"
+                    data-lang-de="Jetzt registrieren"
+                    data-lang-kr="지금 등록하세요"
+                    data-lang-jp="今すぐ登録">
+            </button>
+            <p 
+                data-lang="vi"
+               data-lang-en="Already Having An Account ?"
+               data-lang-vi="Đã có tài khoản?"
+               data-lang-de="Sie haben bereits ein Konto?"
+               data-lang-kr="이미 계정이 있나요?"
+               data-lang-jp="すでにアカウントをお持ちですか？"
+               style="display: inline;">
+            </p>
+            <a asp-controller="User" asp-action="Login" class="text-black"
+               data-lang="vi"
+               data-lang-en="Login Now"
+               data-lang-vi="Đăng Nhập Ngay"
+               data-lang-de="jetzt einloggen"
+               data-lang-kr="지금 로그인하십시오"
+               data-lang-jp="ここでログイン">
+            </a>
+        </form>
+    </div>
+
+</div>
+
+<script src="~/js/language.js"></script>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        const validating = () => {
+            console.log("Oke Oke")
+        }
+    </script>
+}

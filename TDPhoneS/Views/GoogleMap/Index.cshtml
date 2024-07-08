@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "GoogleMap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/googlemap.css">
+</head>
+<body id="body_googlemap" style="background: white;">
+    <div id="page_title" style="display: flex; justify-content: center; align-items: center;">
+        <img src="https://pngimg.com/d/google_maps_pin_PNG26.png" />
+        <h2 style="display: inline; font-weight: bold; margin-left: 5px"
+            data-lang="vi"
+            data-lang-en="Google Map - Branch Map -"
+            data-lang-vi="Google Map - Bản Đồ Chi Nhánh -"
+            data-lang-de="Google Map - Filialplan -"
+            data-lang-kr="Google 지도 - 지점 지도 -"
+            data-lang-jp="Google Map - 支店マップ -">
+        </h2>
+        <h2 style="display: inline; font-weight: bold;color: red; margin-left: 5px;"> TDPhoneS</h2>
+    </div>
+    <div id="map"></div>
+    <script src="~/js/googlemap.js"></script>
+    <script src="~/js/language.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFxBSTTS8-q2X2D8ZkF-0QFTH64QjD5eM&callback=initMap">
+    </script>
+</body>
+</html>

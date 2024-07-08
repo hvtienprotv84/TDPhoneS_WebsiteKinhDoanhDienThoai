@@ -1,0 +1,183 @@
+﻿@{
+    ViewData["Title"] = "ChatAI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/chatai.css" rel="stylesheet" />
+</head>
+<script type="importmap">
+{
+    "imports": {
+      "@@google/generative-ai": "https://esm.run/@@google/generative-ai"
+    }
+}
+</script>
+<body>
+
+    <div class="che_logo_header">
+        <a asp-controller="Home" asp-action="Index" class="logo_chatai">
+            <img style="width: 100px; height: 40px;" src="~/assets/images/logo_tdphones.png">
+            <span style="font-weight: bold;">TDPhoneS</span>
+        </a>
+    </div>
+
+    <!--<div id="preloader"></div>-->
+    <div class="grid-container">
+        <div class="right box-container">
+            <div class="heading1">
+                <img src="./assets/images/logo_tdphones.png" class="cloud" />
+                <p> TDPhoneS</p>
+            </div>
+            <div class="chat-window">
+                <!-- Chat messages will appear here -->
+                <div class="centered-messages" style="margin-top: 30px;">
+                    <div class="message-bubble">
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Which phone should middle-aged men use?"
+                           data-lang-vi="Đàn ông trung niên nên sử dụng điện thoại nào thì phù hợp?"
+                           data-lang-de="Welches Telefon sollten Männer mittleren Alters benutzen?"
+                           data-lang-kr="중년 남성은 어떤 휴대폰을 사용해야 할까요?"
+                           data-lang-jp="中年男性はどの携帯電話を使うべきですか?">
+                        </p>
+                    </div>
+                    <div class="message-bubble">
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="What luxury phone should middle-aged women use?"
+                           data-lang-vi="Phụ nữ trung niên nên sử dụng điện thoại nào thì sang trọng?"
+                           data-lang-de="Welches Luxustelefon sollten Frauen mittleren Alters nutzen?"
+                           data-lang-kr="중년여성은 어떤 명품폰을 써야 할까?"
+                           data-lang-jp="中高年女性が使うべき高級携帯電話は何ですか？">
+                        </p>
+                    </div>
+                    <div class="message-bubble">
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="What phone lines do young people prefer today?"
+                           data-lang-vi="Giới trẻ ưa chuộng dòng điện thoại nào hiện nay?"
+                           data-lang-de="Welche Telefonleitungen bevorzugen junge Leute heute?"
+                           data-lang-kr="오늘날 젊은이들은 어떤 전화선을 선호합니까?"
+                           data-lang-jp="今日の若者はどの電話回線を好みますか?">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="input-area">
+                <button id="new-chat-btn" class="side-btn">
+                    <img src="https://www.freeiconspng.com/thumbs/restart-icon/black-panel-restart-system-icon--6.png" alt="" class="icon"> 
+                </button> 
+                <input type="text" placeholder="" class="input-field" />
+                <button class="send-button" type="submit">
+                    <img src="https://cdn-icons-png.freepik.com/512/5562/5562572.png" alt="Send" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "@@google/generative-ai";
+
+        var API_key = 'AIzaSyBBN1DBDQvLqTGQWTa9QC2BfxL2Sjw8NAw';
+        const genAI = new GoogleGenerativeAI(API_key);
+        let messageHistory = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputField = document.querySelector('.input-field');
+            const chatWindow = document.querySelector('.chat-window');
+            const newChatButton = document.getElementById('new-chat-btn');
+            const sendButton = document.querySelector('.send-button');
+            const bubbleMessages = document.querySelector('.centered-messages');
+
+            function hideBubbleMessages() {
+                bubbleMessages.classList.add('hidden');
+            }
+
+            function showBubbleMessages() {
+                bubbleMessages.classList.remove('hidden');
+            }
+
+            showBubbleMessages();
+
+            function handleTyping() {
+                hideBubbleMessages();
+                inputField.removeEventListener('input', handleTyping);
+            }
+
+            inputField.addEventListener('input', handleTyping);
+
+            const appendMessage = (message, className) => {
+                const messageDiv = document.createElement('div');
+
+                message = message.replace(/\*\*(.*?)\*\*/g, '<b>$1</b> \n');
+                message = message.replace(/\*(.*?)\*/g, '<i>$1</i>');
+                message = message.replace(/\* (.*?)(\n|$)/g, '<li>$1</li>');
+                message = message.replace(/(\d+)\. (.*?)(\n|$)/g, '<ol>$2</ol>');
+                message = message.replace(/```(.*?)```/gs, '<code>$1</code>');
+
+                messageDiv.innerHTML = message;
+                messageDiv.className = className;
+                chatWindow.appendChild(messageDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                if (className === 'user-message') {
+                    messageHistory.push(`• ${message}`);
+                }
+            };
+
+            const sendMessage = async () => {
+                let message = inputField.value.trim();
+                message = message.charAt(0).toUpperCase() + message.slice(1);
+                if (message) {
+                    appendMessage(message, 'user-message');
+                    inputField.value = '';
+                    await run(message);
+                }
+            };
+
+            const clearChat = () => {
+                chatWindow.innerHTML = '';
+                messageHistory = [];
+            };
+
+            newChatButton.addEventListener('click', clearChat);
+
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            sendButton.addEventListener('click', sendMessage);
+
+            async function run(message) {
+                try {
+                    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+                    const result = await model.generateContent(message);
+                    const response = await result.response;
+                    const text = await response.text();
+                    appendMessage(text, 'response-message');
+                } catch (error) {
+                    console.error("Error fetching AI response:", error);
+                    appendMessage("Sorry, I'm having trouble understanding you right now. Please try again later.", 'response-message');
+                }
+            }
+        });
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var preloader = document.getElementById("preloader");
+                if (preloader) {
+                    preloader.style.display = "none";
+                }
+            }, 4000);
+        });
+    </script>
+</body>
+<!--<script src="~/js/chatai.js"></script>-->
+<script src="~/js/language.js"></script>
+</html>

@@ -1,0 +1,408 @@
+﻿@model IEnumerable<TDPhoneS.Models.DataModels.Category>
+<!-- ***** Subscribe Area Starts ***** -->
+<div class="subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" style="flex: 0 0 50%; max-width: 50%;">
+                <div class="section-heading">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Subscribe To Our Newsletter, You Can Get 30% Off Coupon"
+                        data-lang-vi="Đăng Ký Nhận Bản Tin Của Chúng Tôi, Bạn Có Thể Nhận Được Phiếu Giảm Giá 30%"
+                        data-lang-de="Abonnieren Sie unseren Newsletter und Sie erhalten einen 30% Rabatt-Gutschein"
+                        data-lang-kr="뉴스레터를 구독하시면 30% 할인 쿠폰을 받으실 수 있습니다"
+                        data-lang-jp="ニュースレターを購読すると、30％オフのクーポンが入手できます"
+                        style="font-family: cursive">
+                    </h2>
+                </div>
+                <form id="subscribe" action="" method="get">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <fieldset>
+                                <label 
+                                    data-lang="vi"
+                                    data-lang-en="Your Name"
+                                    data-lang-vi="Tên Của Bạn"
+                                    data-lang-de="Ihren Namen"
+                                    data-lang-kr="당신의 이름"
+                                    data-lang-jp="あなたの名前"
+                                    style="font-weight: bold">
+                                </label>
+                                <input name="name" type="text" id="name" placeholder="" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-5">
+                            <fieldset>
+                                <label
+                                    data-lang ="vi"
+                                    data-lang-en="Your Email Address"
+                                    data-lang-vi="Địa Chỉ Email Của Bạn"
+                                    data-lang-de="Ihre E-Mail-Adresse"
+                                    data-lang-kr="귀하의 이메일 주소"
+                                    data-lang-jp="あなたのメールアドレス"
+                                    style="font-weight: bold">
+                                </label>
+                                <input name="email" type="text" id="email" placeholder="" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-2">
+                            <fieldset style="display: flex; justify-content: center; flex-direction: column; align-items: center; font-weight: bold;">
+                                <label 
+                                    data-lang="vi"
+                                       data-lang-en="Send"
+                                       data-lang-vi="Gửi"
+                                       data-lang-de="Senden"
+                                       data-lang-kr="보내다"
+                                       data-lang-jp="送信">
+                                </label>
+                                <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4" style="flex: 0 0 50%; max-width: 50%;">
+                <div class="row">
+                    <div class="col-6" style="flex: 0 0 60%; max-width: 80%;">
+                        <ul>
+                            <li>
+                                <p 
+                                   data-lang="vi"
+                                   data-lang-en="Store Branch:"
+                                   data-lang-vi="Chi Nhánh Cửa Hàng:"
+                                   data-lang-de="Filialfiliale:"
+                                   data-lang-kr="매장 지점:"
+                                   data-lang-jp="店舗支店:"
+                                   style="font-weight: 700; font-size: 16px;">
+                                </p>
+                                <p
+                                    data-lang="vi"
+                                   data-lang-en="🏪 City Branch. Ho Chi Minh:"
+                                   data-lang-vi="🏪 Chi Nhánh TP. Hồ Chí Minh:"
+                                   data-lang-de="🏪 Stadtfiliale. Ho Chi Minh:"
+                                   data-lang-kr="🏪 시티점. 호치민:"
+                                   data-lang-jp="🏪市支店。ホーチミン:">
+                                </p>
+                                <span 
+                                    data-lang="vi"
+                                      data-lang-en="288 February 3, Ward 12, District 10"
+                                      data-lang-vi="288 3 Tháng 2, Phường 12, Quận 10"
+                                      data-lang-de="288 3. Februar, Bezirk 12, Bezirk 10"
+                                      data-lang-kr="288 2월 3일, 12병동, 10구역"
+                                      data-lang-jp="288 2月3日、第12区、第10区"
+                                      style="color: black">
+                                </span><br/>
+                                <span data-lang="vi"
+                                      data-lang-en="888 Provincial Road 10, Binh Tan District"
+                                      data-lang-vi="888 Tỉnh Lộ 10, P. Bình Trị Đông A, Q. Bình Tân"
+                                      data-lang-de="888 Provinzstraße 10, Bezirk Binh Tan"
+                                      data-lang-kr="888 지방 도로 10, Binh Tan District"
+                                      data-lang-jp="888 Provincial Road 10, Binh Tan District"
+                                      style="color: black">
+                                </span><br />
+                                <span data-lang="vi"
+                                      data-lang-en="379 Dien Bien Phu, Ward 25, Binh Thanh "
+                                      data-lang-vi="379 Điện Biên Phủ, P. 25, Q. Bình Thạnh"
+                                      data-lang-de="379 Dien Bien Phu, Bezirk 25, Bezirk Binh Thanh"
+                                      data-lang-kr="빈탄군 25구 디엔비엔푸 379번지"
+                                      data-lang-jp="379 Dien Bien Phu、25区、ビンタイン区"
+                                      style="color: black">
+                                </span><br />
+                                <span data-lang="vi"
+                                      data-lang-en="943 Kha Van Can, Linh Trung Ward, Thu Duc"
+                                      data-lang-vi="943 Kha Vạn Cân, P. Linh Trung, Thủ Đức"
+                                      data-lang-de="943 Kha Van Can, Bezirk Linh Trung, Thu Duc"
+                                      data-lang-kr="943 Kha Van Can, Thu Duc 린쭝구"
+                                      data-lang-jp="943 Kha Van Can, Linh Trung Ward, トゥードゥック"
+                                      style="color: black">
+                                </span><br />
+                                <p data-lang="vi"
+                                   data-lang-en="🏪 City Branch. Tra Vinh:"
+                                   data-lang-vi="🏪 Chi Nhánh TP. Trà Vinh:"
+                                   data-lang-de="🏪 Stadtfiliale. Tra Vinh:"
+                                   data-lang-kr="🏪 시티점. 짜빈:"
+                                   data-lang-jp="🏪市支店。チャ・ヴィン:">
+                                </p>
+                                <span data-lang="vi"
+                                      data-lang-en="24 Dien Bien Phu, Ward 6, City. Tra Vinh"
+                                      data-lang-vi="24 Điện Biên Phủ, P. 6, TP. Trà Vinh"
+                                      data-lang-de="24 Dien Bien Phu, Bezirk 6, Stadt. Tra Vinh"
+                                      data-lang-kr="24 Dien Bien Phu, Ward 6, City. 짜빈"
+                                      data-lang-jp="ディエンビエンフー、市6区24番地。チャビン"
+                                      style="color: black">
+                                </span><br/>
+                                <span data-lang="vi"
+                                      data-lang-en="9 Le Loi, Hamlet 4, City. Tra Vinh"
+                                      data-lang-vi="9 Lê Lợi, Khóm 4, TP. Trà Vinh"
+                                      data-lang-de="9 Le Loi, Hamlet 4, Stadt. Tra Vinh"
+                                      data-lang-kr="9 레 로이, 햄릿 4, 시티. 짜빈"
+                                      data-lang-jp="9 Le Loi、ハムレット 4、シティ。チャビン"
+                                      style="color: black">
+                                </span>
+                                <br />
+                                <span data-lang="vi"
+                                      data-lang-en="289 Nguyen Dang, Ward 9, City. Tra Vinh"
+                                      data-lang-vi="289 Nguyễn Đáng, Phường 9, TP. Trà Vinh"
+                                      data-lang-de="289 Nguyen Dang, Bezirk 9, Stadt. Tra Vinh"
+                                      data-lang-kr="289 Nguyen Dang, Ward 9, City. 짜빈"
+                                      data-lang-jp="289 グエンダン、市 9 区。チャビン"
+                                      style="color: black">
+                                </span>
+                                <br />
+                                <span data-lang="vi"
+                                      data-lang-en="184, Nguyen Thi Minh Khai, W. 7, City. Tra Vinh"
+                                      data-lang-vi="184, Nguyễn Thị Minh Khai, P. 7, TP. Trà Vinh"
+                                      data-lang-de="184, Nguyen Thi Minh Khai, Bezirk 7, Stadt. Tra Vinh"
+                                      data-lang-kr="184, Nguyen Thi Minh Khai, Ward 7, City. 짜빈"
+                                      data-lang-jp="184、グエン・ティ・ミン・カイ、市7区。チャビン"
+                                      style="color: black">
+                                </span>
+                                <br />
+                                <a style="color: black; font-size: 14px;" href="/GoogleMap"
+                                   data-lang="vi"
+                                   data-lang-en="📍🗺️ See detailed address on Google Map"
+                                   data-lang-vi="📍🗺️ Xem Địa Chỉ Chi Tiết Ở Google Map"
+                                   data-lang-de="📍🗺️ Siehe Adresse auf Google Map"
+                                   data-lang-kr="📍🗺️ Google 지도에서 자세한 주소 보기"
+                                   data-lang-jp="📍🗺️ Googleマップで詳しい住所を見る">
+                                </a>
+                            </li>
+                            <li>
+                            <p
+                               data-lang ="vi"
+                               data-lang-en="Phone Number:"
+                               data-lang-vi="Số Điện Thoại:"
+                               data-lang-de="Telefonnummer:"
+                               data-lang-kr="전화 번호:"
+                               data-lang-jp="電話番号:">
+                            </p>
+                                <span style="color: black">(+84) 93 999 9999</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6" style="flex: 0 0 30%; max-width: 30%;">
+                        <ul>
+                            <li>
+                                <p
+                                    data-lang ="vi"
+                                   data-lang-en="Working Hours:"
+                                   data-lang-vi="Giờ Làm Việc:"
+                                   data-lang-de="Arbeitszeit:"
+                                   data-lang-kr="근무 시간:"
+                                   data-lang-jp="作業時間：">
+                                </p>
+                                <span 
+                                    data-lang="vi"
+                                      data-lang-en="+ 07:30 AM <br/> + 9:30 PM"
+                                      data-lang-vi="+ 07:30 Sáng <br/> + 9:30 Tối"
+                                      data-lang-de="+ 07:30 <br/> + 21:30 Uhr"
+                                      data-lang-kr="+ 오전 07:30 <br/> + 오후 9:30"
+                                      data-lang-jp="+ 午前7時30分 <br/> + 午後9時30分"
+                                      style="color: black">
+                                </span>
+                            </li>
+                            <li>
+                                <p
+                                    data-lang ="vi"
+                                    data-lang-en="Email"
+                                    data-lang-vi="Email"
+                                    data-lang-de="E-Mail"
+                                    data-lang-kr="이메일"
+                                    data-lang-jp="Eメール">
+                                </p>
+                                <span style="color: black">tdphones@gmail.com</span>
+                            </li>
+                            <li>
+                                <p
+                                   data-lang ="vi"
+                                   data-lang-en="Social Media:"
+                                   data-lang-vi="Mạng Xã Hội:"
+                                   data-lang-de="Soziales Netzwerk:"
+                                   data-lang-kr="소셜 네트워크:"
+                                   data-lang-jp="ソーシャルネットワ：">
+                                </p>
+                                <ul style="display: flex; flex-direction: row; height: 40px; width: 120px; border-radius: 10px; justify-content: center;">
+                                    <li style="padding-top: 5px; font-size: 24px; margin-top: -2px; margin-left: 5px;"><a href="" target="_blank"><i style="color: #007bff;" class="fa fa-facebook"></i></a></li>
+                                    <li style="padding-top: 5px; font-size: 24px; padding-left: 20px; margin-top: -2px;"><a href="" target="_blank"><i style="color: #007bff;" class="fa fa-envelope"></i></a></li>
+                                    <li style="padding-top: 5px; font-size: 24px; padding-left: 20px; margin-top: -2px;"><a href="" target="_blank"><img width="28" style="margin-top: -5px;" src="https://img.icons8.com/?size=100&id=0m71tmRjlxEe&format=png&color=000000" /></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Subscribe Area Ends ***** -->
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <!--<img src="~/assets/images/white-logo.png" alt="tdphones ecommerce">-->
+                        <img style="width: 200px; height: 80px;" src="~/assets/images/logo_tdphones.png">
+                        <p style="color:red; margin-top:30px; font-size: 40px; font-weight: bold;">TDPhoneS</p>
+                    </div>
+                    <ul>
+                        <li><a href="#"
+                               data-lang="vi"
+                               data-lang-en="No. 288 3/2 Street, Ward 12, District 10, Ho Chi Minh City"
+                               data-lang-vi="Số 288 Đường 3 Tháng 2, Phường 12, Quận 10, TP.Hồ Chí Minh"
+                               data-lang-de="Nr. 288 3/2 Street, Bezirk 12, Bezirk 10, Ho-Chi-Minh-Stadt"
+                               data-lang-kr="호치민시 10군, 12구, 288 3/2 Street"
+                               data-lang-jp="No. 288 3/2 Street、12区、10区、ホーチミン市">
+                        </a></li>
+                        <li><a href="#">tdphones@gmail.com</a></li>
+                        <li><a href="#">(+84) 93 999 9999</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4
+                    data-lang ="vi"
+                    data-lang-en="Product Category"
+                    data-lang-vi="Danh Mục Sản Phẩm"
+                    data-lang-de="Produktportfolio"
+                    data-lang-kr="제품 포트폴리오"
+                    data-lang-jp="製品ポートフォリオ">
+                </h4>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+
+                        <li>
+                            <a href="">
+                                @item.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4 
+                    data-lang="vi"
+                    data-lang-en="Useful Page"
+                    data-lang-vi="Trang Hữu Ích"
+                    data-lang-de="Nützliche Seite"
+                    data-lang-kr="유용한 페이지"
+                    data-lang-jp="お役立ちページ">
+                </h4>
+                <ul>
+                    <li>
+                        <a href="/Login" 
+                           data-lang="vi"
+                           data-lang-en="Login"
+                           data-lang-vi="Đăng nhập"
+                           data-lang-de="Einloggen"
+                           data-lang-kr="로그인"
+                           data-lang-jp="ログイン">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Register"
+                           data-lang="vi"
+                           data-lang-en="Register"
+                           data-lang-vi="Đăng Ký"
+                           data-lang-de="Registrieren"
+                           data-lang-kr="등록하다"
+                           data-lang-jp="登録する">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Cart"
+                           data-lang="vi"
+                           data-lang-en="Cart"
+                           data-lang-vi="Giỏ Hàng"
+                           data-lang-de="Einkaufskorb"
+                           data-lang-kr="카트"
+                           data-lang-jp="カート">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/About"
+                           data-lang="vi"
+                           data-lang-en="About Us"
+                           data-lang-vi="Về chúng tôi"
+                           data-lang-de="Über uns"
+                           data-lang-kr="회사 소개"
+                           data-lang-jp="私たちについて">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact"
+                           data-lang="vi"
+                           data-lang-en="Contact Us"
+                           data-lang-vi="Liên hệ"
+                           data-lang-de="Kontaktiere uns"
+                           data-lang-kr="문의하기"
+                           data-lang-jp="連絡">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4 
+                    data-lang="vi"
+                    data-lang-en="Utilities"
+                    data-lang-vi="Tiện Ích"
+                    data-lang-de="Dienstprogramme"
+                    data-lang-kr="유용"
+                    data-lang-jp="公共事業">
+                </h4>
+                <ul>
+                    <li>
+                        <a href="/ChatAI"
+                           data-lang="vi"
+                           data-lang-en="Chat AI - Consulting"
+                           data-lang-vi="Chat AI - Tư Vấn"
+                           data-lang-de="Chat AI – Beratung"
+                           data-lang-kr="Chat AI - 컨설팅"
+                           data-lang-jp="チャットAI・コンサルティング">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Notes"
+                           data-lang="vi"
+                           data-lang-en="Notes"
+                           data-lang-vi="Ghi Chú"
+                           data-lang-de="Notiz"
+                           data-lang-kr="메모"
+                           data-lang-jp="注記">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/GoogleMap"
+                           data-lang="vi"
+                           data-lang-en="Google Map Branch"
+                           data-lang-vi="Chi Nhánh Bản Đồ Google"
+                           data-lang-de="Google Maps-Zweig"
+                           data-lang-kr="Google 지도 지점"
+                           data-lang-jp="Google マップ ブランチ">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p
+                       data-lang ="vi"
+                       data-lang-en="Copyright © 2024 TDPhoneS Co., Ltd. All Rights Reserved."
+                       data-lang-vi="Bản quyền © 2024 TDPhoneS Co., Ltd. Đã đăng ký bản quyền."
+                       data-lang-de="Gerätestatus © 2024 TDPhoneS Co., Ltd. Alle Geräte anzeigen."
+                       data-lang-kr="© 2024 TDPhoneS Co., Ltd. 더 많은 정보를 확인하세요."
+                       data-lang-jp="著作権 © 2024 TDPhoneS Co., Ltd. すべての権利は留保されています。">
+                    </p>
+                    <ul>
+                        <li><a href="" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                        <li><a href="" target="_blank"><img width="28" src="https://img.icons8.com/?size=100&id=0m71tmRjlxEe&format=png&color=000000" /></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/language.js"></script>
+</footer>

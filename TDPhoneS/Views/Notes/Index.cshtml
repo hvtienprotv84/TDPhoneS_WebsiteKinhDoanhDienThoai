@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Notes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/notes.css">
+    <title>Notes</title>
+</head>
+<body style="background-color: white;">
+    <div class="container_notes">
+    <div id="notification"></div>
+    <div class="gen">
+            <label data-lang="vi"
+                   data-lang-en="Please Enter Notes!"
+                   data-lang-vi="Mời Bạn Nhập Ghi Chú!"
+                   data-lang-de="Bitte geben Sie Notizen ein!"
+                   data-lang-kr="메모를 입력해주세요!"
+                   data-lang-jp="メモを入力してください。"
+                   style="color: white">
+            </label>
+        <form class="form" style="border: 2px white dashed; border-radius: 10px;">
+            <input id="noteINPUT" type="text" placeholder="" name="note" autocomplete="off" title="Enter a Note" />
+            <button id="saveBUTTON" type="submit"
+                data-lang="vi"
+                data-lang-en="Save"
+                data-lang-vi="Lưu"
+                data-lang-de="Sparen"
+                data-lang-kr="구하다"
+                data-lang-jp="保存"
+                style="border-left: 2px white dashed; color: white;">
+            </button>
+        </form>
+    </div>
+
+    <div class="gen">
+        <h1 id="notesH"></h1>
+        <div id="notes">
+        </div>
+    </div>
+    </div>
+    <script src="./js/notes.js"></script>
+    <script src="~/js/language.js"></script>
+</body>
+</html>

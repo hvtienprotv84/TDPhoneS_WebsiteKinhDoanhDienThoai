@@ -1,0 +1,96 @@
+﻿@model X.PagedList.IPagedList<TDPhoneS.Models.DataModels.Contact>
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Danh Sách Liên Hệ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var sorts = ViewBag.sorts;
+}
+
+<h4>Danh Sách Liên Hệ</h4>
+
+<hr />
+
+<form class="row p-2 justify-content-between" method="get">
+    <div class="col-lg-4 row ">
+        <select class="form-control col-lg-8 rounded-0 " name="sort">
+            <option value="">----- Sắp Xếp Theo -----</option>
+            <option value="Id-ASC" selected="@(sorts == "Id-ASC")">Sắp Xếp Theo Id (A - Z)</option>
+            <option value="Id-DESC" selected="@(sorts == "Id-DESC")">Sắp Xếp Theo Id (Z - A)</option>
+            <option value="CreatedDate-ASC" selected="@(sorts == "CreatedDate-ASC")">Sắp Xếp Theo Ngày Tạo (A - Z)</option>
+            <option value="CreatedDate-DESC" selected="@(sorts == "CreatedDate-DESC")">Sắp Xếp Theo Ngày Tạo (Z - A)</option>
+        </select>
+        <button class="col-lg-2 btn rounded-0 btn-primary">Tìm</button>
+        @if (!string.IsNullOrEmpty(sorts))
+        {
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="col-lg-2 btn rounded-0 btn-warning">Hủy Tìm</a>
+
+        }
+    </div>
+    <div class="col-lg-7"></div>
+    <div class="col-lg-1">
+        @if (Model.Count > 0)
+        {
+            <a class="btn btn-outline-secondary rounded-0" style="background-color: #25764a; color: white;" asp-area="Admin" asp-controller="Contact" asp-action="Export">Xuất Excel</a>
+
+        }
+    </div>
+</form>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+            </th>
+            <th>
+                Tin Nhắn
+            </th>
+            <th>
+                Ngày Tạo
+            </th>
+            <th>
+                Chức Năng
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Messsage)
+                </td>
+                <td>
+                    @(item.Created_Date != null ? item.Created_Date.Value.ToString("dd / MM / yyyy hh:mm:ss") : "Null")
+                </td>
+                <td>
+                    <a href="mailto:@item.Email" class="btn btn-outline-success rounded-0">Trả Lời Tin Nhắn</a> |
+                    <a asp-area="Admin" asp-controller="Contact" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger rounded-0">Xoá Tin Nhắn</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+    new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    }
+)
+
+

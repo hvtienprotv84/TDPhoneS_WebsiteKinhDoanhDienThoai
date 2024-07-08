@@ -1,0 +1,135 @@
+﻿@model X.PagedList.IPagedList<TDPhoneS.Models.DataModels.Product>
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Danh Sách Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    var names = ViewBag.names;
+    var sorts = ViewBag.sorts;
+}
+<h4>Danh Sách Sản Phẩm</h4>
+<hr />
+<form class="row p-2" method="get">
+    <div class="col-lg-4 p-0">
+        <input class="form-control rounded-0" value="@names" name="name" placeholder="Tìm Theo Tên..." />
+    </div>
+
+    <div class="col-lg-4 row">
+        <select class="form-control col-lg-8 rounded-0 " name="sort">
+            <option value="">----- Sắp Xếp Theo -----</option>
+            <option value="Id-ASC" selected="@(sorts == "Id-ASC")">Sắp Xếp Theo Id (A - Z)</option>
+            <option value="Id-DESC" selected="@(sorts == "Id-DESC")">Sắp Xếp Theo Id (Z - A)</option>
+            <option value="Name-ASC" selected="@(sorts == "Name-ASC")">Sắp Xếp Theo Tên (A - Z)</option>
+            <option value="Name-DESC" selected="@(sorts == "Name-DESC")">Sắp Xếp Theo Tên (Z - A)</option>
+            <option value="CreatedDate-ASC" selected="@(sorts == "CreatedDate-ASC")">Sắp Xếp Theo Ngày Tạo (A - Z)</option>
+            <option value="CreatedDate-DESC" selected="@(sorts == "CreatedDate-DESC")">Sắp Xếp Theo Ngày Tạo (Z - A)</option>
+            <option value="UpdatedDate-ASC" selected="@(sorts == "UpdatedDate-ASC")">Sắp Xếp Theo Ngày Cập Nhật (A - Z)</option>
+            <option value="UpdatedDate-DESC" selected="@(sorts == "UpdatedDate-DESC")">Sắp Xếp Theo Ngày Cập Nhật (Z - A)</option>
+        </select>
+        <button class="col-lg-2 btn rounded-0 btn-primary">Tìm</button>
+        @if (!string.IsNullOrEmpty(names) || !string.IsNullOrEmpty(sorts))
+        {
+            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="col-lg-2 btn rounded-0 btn-warning">Hủy Tìm</a>
+
+        }
+    </div>
+
+    <div class="col-lg-4">
+    </div>
+</form>
+<a asp-action="Create" class="btn btn-outline-primary rounded-0">Tạo Sản Phẩm</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID Sản Phẩm
+            </th>
+            <th>
+                Tên Sản Phẩm
+            </th>
+            <th>
+                Hình Ảnh Sản Phẩm
+            </th>
+            <th>
+                Giá Gốc Sản Phẩm
+            </th>
+            <th>
+                Giá Giảm Sản Phẩm
+            </th>
+            <th>
+                Trạng Thái
+            </th>
+            <th>
+                Mô Tả
+            </th>
+            <th>
+                Danh Mục
+            </th>
+            <th>
+                Ngày Tạo
+            </th>
+            <th>
+                Ngày Cập Nhật
+            </th>
+            <th>
+                Chức Năng
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td style="width: 10%;">
+                    <img src="~/Uploads/product/@item.Image" class="card-img" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalePrice)
+                </td>
+                <td>
+                    @if (item.Status == 1)
+                    {
+                        <span class="badge badge-success">Còn Hàng</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Hết Hàng</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descriptions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @(item.Created_Date != null ? item.Created_Date : "Null")
+                </td>
+                <td>
+                    @(item.Updated_Date != null ? item.Updated_Date : "Null")
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success rounded-0">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-warning rounded-0">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger rounded-0">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+    new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    }
+)

@@ -1,0 +1,220 @@
+﻿@model IEnumerable<TDPhoneS.Models.DataModels.Cart>
+@{
+    ViewData["Title"] = "Cart Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    decimal? subTotal = 0;
+    foreach(var item in Model)
+    {
+        subTotal += item.Total;
+    }
+}
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Your Cart"
+                        data-lang-vi="Giỏ Hàng Của Bạn"
+                        data-lang-de="Ihr Warenkorb"
+                        data-lang-kr="장바구니"
+                        data-lang-jp="あなたのカート">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<div class="container-fluid">
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Image"
+                           data-lang-vi="Hình Ảnh"
+                           data-lang-de="Bild"
+                           data-lang-kr="심상"
+                           data-lang-jp="画像">
+                        </p>
+                    </th>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Product Name"
+                           data-lang-vi="Tên Sản Phẩm"
+                           data-lang-de="Name des Produkts"
+                           data-lang-kr="제품명"
+                           data-lang-jp="製品名">
+                        </p>
+                    </th>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Product Price"
+                           data-lang-vi="Giá Sản Phẩm"
+                           data-lang-de="Produktpreis"
+                           data-lang-kr="제품 가격"
+                           data-lang-jp="製品価格">
+                        </p>
+                    </th>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Quantity"
+                           data-lang-vi="Số Lượng"
+                           data-lang-de="Quantität"
+                           data-lang-kr="수량"
+                           data-lang-jp="数量">
+                        </p>
+                    </th>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Total Product Price"
+                           data-lang-vi="Tổng Giá Sản Phẩm"
+                           data-lang-de="Gesamtproduktpreis"
+                           data-lang-kr="총 제품 가격"
+                           data-lang-jp="製品の合計価格">
+                        </p>
+                    </th>
+                    <th>
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Functionality"
+                           data-lang-vi="Chức Năng"
+                           data-lang-de="Funktionalität"
+                           data-lang-kr="기능"
+                           data-lang-jp="関数">
+                        </p>
+                    </th>
+
+                    <!--
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.SalePrice)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    <th>
+                        <p>Chức Năng</p>
+                    </th>
+                    -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 10%;">
+                            <img alt="@item?.Product?.Name" src="~/Uploads/product/@item?.Product?.Image" class="card-img" />
+                        </td>
+                        <td>
+                            @item.Product.Name
+                        </td>
+                        <td>
+                            @String.Format("{0:C}",@item.Product.SalePrice)
+                        </td>
+                        <td>
+                            <form method="POST"
+                                  asp-controller="Cart"
+                                  asp-action="Update"
+                                  class="col-md-4 col-lg-4 col-xl-3 d-flex">
+                                <div class="quantity buttons_added">
+                                    <input type="hidden" value="@item.ID" name="Id" />
+                                    <input type="hidden" value="@item.Product.Id" name="ProdId" />
+                                    <div style="display: flex; justify-content: center; align-content: center; flex-direction: row; text-align: center">
+                                    <input style="margin-right: 20px" type="submit" value="-" class="minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                    <input type="number" step="1" min="1" max="" name="quantity" value="@item.Quantity" id="quantity" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                    <p style="position: absolute; margin-top: 10px;">@item.Quantity</p>
+                                    <input style="margin-left: 20px" type="submit" value="+" class="plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            @String.Format("{0:C}", item.Total)
+                        </td>
+                        <td>
+                            <a class="text-danger" asp-controller="Cart" asp-action="Delete" asp-route-id="@item.ID"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <th colspan="3" class="text-right">
+                        <p 
+                           data-lang="vi"
+                           data-lang-en="Total Amount:"
+                           data-lang-vi="Tổng Tiền:"
+                           data-lang-de="Gesamtmenge:"
+                           data-lang-kr="총액:"
+                           data-lang-jp="合計金額：">
+                        </p>
+                    </th>
+                    <td colspan="2">
+                        @String.Format("{0:C}", subTotal)
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        <div class="row">
+            <div class="col-lg-8">
+            </div>
+            <div class="col-lg-4">
+                <a asp-controller="Checkout" asp-action="Checkout" class="btn btn-warning btn-lg btn-block rounded-0"
+                   data-lang="vi"
+                   data-lang-en="Checkout Now"
+                   data-lang-vi="Thanh Toán Ngay"
+                   data-lang-de="Checke jetzt aus"
+                   data-lang-kr="지금 결제하세요"
+                   data-lang-jp="今すぐチェックアウト">
+                </a>
+            </div>
+        </div>
+    } else
+    {
+        <div class="text-center">
+            <h2 style="display: inline;"
+                data-lang="vi"
+                data-lang-en="Your Cart Is Empty, "
+                data-lang-vi="Giỏ Hàng Của Bạn Đang Trống, "
+                data-lang-de="Ihr Warenkorb ist leer, "
+                data-lang-kr="장바구니가 비어 있습니다. "
+                data-lang-jp="あなたのカートは空です、">
+            </h2>
+            <a asp-controller="Product" asp-action="Index" class="text-secondary" style="font-size: 32px;"
+               data-lang="vi"
+               data-lang-en=" Click Here To Continue Shopping"
+               data-lang-vi=" Nhấn Vào Đây Để Tiếp Tục Mua Sắm"
+               data-lang-de=" Klicken Sie hier, um mit dem Einkaufen fortzufahren"
+               data-lang-kr=" 쇼핑을 계속하려면 여기를 클릭하세요"
+               data-lang-jp=" ショッピングを続けるにはここをクリックしてください">
+            </a>
+            <br/>
+            <img style="width: 750px;height: 550px;" src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-5521508-4610092.png">
+        </div>
+    }
+
+</div>
+<script src="~/js/language.js"></script>
+

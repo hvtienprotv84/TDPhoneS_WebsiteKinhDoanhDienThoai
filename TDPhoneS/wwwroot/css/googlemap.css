@@ -1,0 +1,54 @@
+﻿#body_googlemap {
+    /*background: #CBBB9B;*/
+    font-family: "Helvetica", "Arial", sans-serif;
+    margin-top: 78px;
+}
+
+#page_title {
+    background: #CBCB9B;
+    padding: 5px 0px 5px 50px;
+    letter-spacing: 2px;
+}
+
+    #page_title img {
+        width: 35px;
+        height: 50px;
+        animation: logoAnimation 2s infinite;
+    }
+@keyframes logoAnimation {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-30px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+.content {
+    float: left;
+    padding-left: 10px;
+    padding-left: 5px;
+    letter-spacing: 0px;
+}
+
+#footer {
+    float: right;
+    padding: 15px 5px 0px 0px;
+}
+
+#logo_chinhanh_googlemap {
+    width: 200px;
+    height: 80px;
+    display: flex;
+    margin: 0 auto;
+}

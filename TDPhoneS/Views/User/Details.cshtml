@@ -1,0 +1,299 @@
+﻿@model TDPhoneS.Models.ViewModels.UpdateAccountViewModels
+
+
+@{
+    ViewData["Title"] = "Details Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="./css/ghiam.css" rel="stylesheet" />
+@section Styles{
+    <style>
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #fff !important;
+            background-color: #6c757d !important;
+            border-radius: 0 !important;
+        }
+
+        .nav-pills .nav-link{
+            border-radius: 0 !important;
+        }
+    </style>
+}
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="My Profile"
+                        data-lang-vi="Hồ Sơ Của Tôi"
+                        data-lang-de="Mein Profil"
+                        data-lang-kr="내 프로필"
+                        data-lang-jp="私のプロフィール">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<div class="container">
+    <div class="row">
+        
+        <div class="col-lg-12">
+            <div class="iq-card">
+                <div class="iq-card-body p-0">
+                    <div class="iq-edit-list">
+                        <ul class="iq-edit-profile d-flex nav nav-pills">
+                            <li class="col-md-6 p-0 ">
+                                <a class="nav-link active text-dark" data-toggle="pill" href="#personal-information"
+                                   data-lang="vi"
+                                   data-lang-en="Personal Information"
+                                   data-lang-vi="Thông Tin Cá Nhân"
+                                   data-lang-de="Persönliche Angaben"
+                                   data-lang-kr="개인 정보"
+                                   data-lang-jp="個人情報">
+                                </a>
+                            </li>
+                            <li class="col-md-6 p-0">
+                                <a class="nav-link text-dark" data-toggle="pill" href="#chang-pwd"
+                                   data-lang="vi"
+                                   data-lang-en="Change Password"
+                                   data-lang-vi="Thay Đổi Mật Khẩu"
+                                   data-lang-de="Änder das Passwort"
+                                   data-lang-kr="비밀번호 변경"
+                                   data-lang-jp="パスワードを変更する">
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 mt-4">
+            <div class="iq-edit-list-data">
+                <div class="tab-content">
+
+                    <div class="tab-pane fade active show" id="personal-information" role="tabpanel">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title"
+                                        data-lang="vi"
+                                        data-lang-en="Profile Information"
+                                        data-lang-vi="Thông Tin Hồ Sơ"
+                                        data-lang-de="Profil Information"
+                                        data-lang-kr="프로필 정보"
+                                        data-lang-jp="プロフィール情報">
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="iq-card-body">
+
+                                <form asp-action="EditProfile" enctype="multipart/form-data" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="Created_Date" />
+                                    <input type="hidden" asp-for="RoleId" />
+                                    <input type="hidden" name="oldImage" value="@Model.Avatar" />
+                                    <input type="hidden" name="oldPassword" value="@Model.Password" />
+                                    <div class="form-group row align-items-center">
+                                        <div class="col-md-4">
+                                            <div class="profile-img-edit">
+                                                <img style="width: 160px;" class="card-img" src="~/Uploads/user/@(string.IsNullOrEmpty(Model.Avatar) ? "default.png" : Model.Avatar)"  alt="profile-pic">
+                                                <div class="p-image">
+                                                    <i class="ri-pencil-line upload-button"></i>
+                                                    <input class="file-upload" name="fileUpload" type="file" accept="image/*" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <label asp-for="FirstName" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="First Name"
+                                                   data-lang-vi="Họ"
+                                                   data-lang-de="Vorname"
+                                                   data-lang-kr="이름"
+                                                   data-lang-jp="ファーストネーム">
+                                            </label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label asp-for="LastName" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="Last Name"
+                                                   data-lang-vi="Tên"
+                                                   data-lang-de="Familienname, Nachname"
+                                                   data-lang-kr="성"
+                                                   data-lang-jp="苗字">
+                                            </label>
+                                            <input asp-for="LastName" class="form-control" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label asp-for="Username" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="Username"
+                                                   data-lang-vi="Tên Người Dùng"
+                                                   data-lang-de="Nutzername"
+                                                   data-lang-kr="사용자 이름"
+                                                   data-lang-jp="ユーザー名">
+                                            </label>
+                                            <input asp-for="Username" class="form-control" />
+                                            <span asp-validation-for="Username" class="text-danger"></span>
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <label asp-for="Email" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="Email"
+                                                   data-lang-vi="Email"
+                                                   data-lang-de="E-Mail"
+                                                   data-lang-kr="이메일"
+                                                   data-lang-jp="Eメール">
+                                            </label>
+                                            <input asp-for="Email" class="form-control" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label asp-for="Phone" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="Phone Number"
+                                                   data-lang-vi="Số Điện Thoại"
+                                                   data-lang-de="Telefonnummer"
+                                                   data-lang-kr="전화 번호"
+                                                   data-lang-jp="電話番号">
+                                            </label>
+                                            <input asp-for="Phone" class="form-control" />
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label asp-for="Address" class="control-label"
+                                                   data-lang="vi"
+                                                   data-lang-en="Address"
+                                                   data-lang-vi="Địa Chỉ"
+                                                   data-lang-de="Adresse"
+                                                   data-lang-kr="주소"
+                                                   data-lang-jp="住所">
+                                            </label>
+                                            <textarea asp-for="Address" class="form-control"></textarea>
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <!--<input type="submit" value="Save" class="btn btn-outline-secondary rounded-0 btn-block" />-->
+                                        <button type="submit" value="Save" class="btn btn-outline-secondary rounded-0 btn-block"
+                                                data-lang="vi"
+                                                data-lang-en="Save"
+                                                data-lang-vi="Lưu"
+                                                data-lang-de="Sparen"
+                                                data-lang-kr="구하다"
+                                                data-lang-jp="保存">
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="chang-pwd" role="tabpanel">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title"
+                                        data-lang="vi"
+                                        data-lang-en="Change Password"
+                                        data-lang-vi="Thay Đổi Mật Khẩu"
+                                        data-lang-de="Änder das Passwort"
+                                        data-lang-kr="비밀번호 변경"
+                                        data-lang-jp="パスワードを変更する">
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="iq-card-body">
+                                <form asp-action="ChangePassword" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="FirstName" />
+                                    <input type="hidden" asp-for="LastName" />
+                                    <input type="hidden" asp-for="Username" />
+                                    <input type="hidden" asp-for="RoleId" />
+                                    <input type="hidden" name="oldPassword" value="@Model.Password" />
+                                    <input type="hidden" asp-for="Avatar" />
+                                    <input type="hidden" asp-for="Created_Date" />
+
+                                    <div class="form-group">
+                                        <label for="cpass" asp-for="Password"
+                                               data-lang="vi"
+                                               data-lang-en="Current Password"
+                                               data-lang-vi="Mật Khẩu Hiện Tại"
+                                               data-lang-de="Aktuelles Passwort"
+                                               data-lang-kr="현재 비밀번호"
+                                               data-lang-jp="現在のパスワード">
+                                        </label>
+                                        <input type="Password" class="form-control" id="cpass" asp-for="Password">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="npass" asp-for="NewPassword"
+                                               data-lang="vi"
+                                               data-lang-en="New Password"
+                                               data-lang-vi="Mật Khẩu Mới"
+                                               data-lang-de="Ein neues Passwort"
+                                               data-lang-kr="새 비밀번호"
+                                               data-lang-jp="新しいパスワード">
+                                        </label>
+                                        <input type="Password" class="form-control" id="npass" asp-for="NewPassword">
+                                        <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vpass" asp-for="ConfirmPassword"
+                                               data-lang="vi"
+                                               data-lang-en="Confirm New Password"
+                                               data-lang-vi="Xác Nhận Mật Khẩu Mới"
+                                               data-lang-de="bestätige neues Passwort"
+                                               data-lang-kr="새 암호를 확인합니다"
+                                               data-lang-jp="新しいパスワードを確認">
+                                        </label>
+                                        <input type="Password" class="form-control" id="vpass" asp-for="ConfirmPassword">
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-secondary rounded-0 btn-block mr-2"
+                                            data-lang="vi"
+                                            data-lang-en="Save"
+                                            data-lang-vi="Lưu"
+                                            data-lang-de="Sparen"
+                                            data-lang-kr="구하다"
+                                            data-lang-jp="保存">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/language.js"></script>
+<script src="./js/ghiam.js"></script>

@@ -1,0 +1,96 @@
+﻿@model TDPhoneS.Models.DataModels.Order
+@{
+    ViewData["Title"] = "Chi Tiết Đơn Đặt Hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var i = 1;
+
+    var listProd = ViewBag.orderDetails;
+}
+<h4>Chi Tiết Đơn Đặt Hàng Của: #@Model.Id</h4>
+
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Thông Tin Đơn Đặt Hàng</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID Đơn Đặt Hàng </th>
+                        <td>#@Model.Id</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Ngày Đặt Hàng
+                        </th>
+                        <td>@Model.Created_Date</td>
+                    </tr>
+                    <tr>
+                        <th>Tổng Tiền</th>
+                        <td>@String.Format("{0:C}", Model.TotalPrice)</td>
+                    </tr>
+                    <tr>
+                        <th>Trạng Thái</th>
+                        <td>
+                            @Model.Status
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+        <div class="col-md-6">
+            <h3>Thông Tin Giao Hàng</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Họ và Tên</th>
+                        <td>@Model.DeliverUser</td>
+                    </tr>
+                    <tr>
+                        <th>Địa Chỉ</th>
+                        <td>@Model.DeliverAddress</td>
+                    </tr>
+                    <tr>
+                        <th>Số Điện Thoại</th>
+                        <td>@Model.DeliverPhone</td>
+                    </tr>
+                    <tr>
+                        <th>Ghi Chú</th>
+                        <td>@Model.Note</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <br />
+    <h4>Sản Phẩm Của Đơn Đặt Hàng</h4>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">No. </th>
+                <th>Tên Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Giá</th>
+                <th>Giá Giảm Sản Phẩm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in listProd)
+            {
+                <tr>
+                    <td class="text-center">@i</td>
+                    <td>@item.Product?.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Product?.SalePrice > 0 ? String.Format("{0:C}", item.Product?.SalePrice) : String.Format("{0:C}", item.Product?.Price))</td>
+                    <td>@(String.Format("{0:C}", item.TotalPrice))</td>
+                </tr>
+                i++;
+            }
+
+
+        </tbody>
+    </table>
+</div>

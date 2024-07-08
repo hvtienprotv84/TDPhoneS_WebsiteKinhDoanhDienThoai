@@ -1,0 +1,174 @@
+﻿@model IEnumerable<TDPhoneS.Models.DataModels.Order>
+
+@{
+    ViewData["Title"] = "List Ordered";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2 
+                        data-lang="vi"
+                        data-lang-en="Ordered History"
+                        data-lang-vi="Lịch Sử Đặt Hàng"
+                        data-lang-de="Bestellhistorie"
+                        data-lang-kr="주문 내역"
+                        data-lang-jp="注文履歴">
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+<div class="container-fluid">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Number Order"
+                       data-lang-vi="Số Thứ Tự"
+                       data-lang-de="Numerische Ordnung"
+                       data-lang-kr="숫자순"
+                       data-lang-jp="番号順">
+                    </p>
+                </th>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Recipient Name"
+                       data-lang-vi="Tên Người Nhận"
+                       data-lang-de="Name des Empfängers"
+                       data-lang-kr="수령인의 이름"
+                       data-lang-jp="受取人の氏名">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Delivery Address"
+                       data-lang-vi="Địa Chỉ Giao Hàng"
+                       data-lang-de="Lieferadresse"
+                       data-lang-kr="배달 주소"
+                       data-lang-jp="配送先住所">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Recipient Phone Number"
+                       data-lang-vi="Số Điện Thoại Người Nhận"
+                       data-lang-de="Telefonnummer des Empfängers"
+                       data-lang-kr="받는 사람 전화번호"
+                       data-lang-jp="受信者の電話番号">
+                    </p>
+                </td>
+                <td>
+                    <p
+                       data-lang ="vi"
+                       data-lang-en="Item Quantity"
+                       data-lang-vi="Số Lượng Mặt Hàng"
+                       data-lang-de="Anzahl der Teile"
+                       data-lang-kr="항목 수"
+                       data-lang-jp="アイテム数">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Total Amount:"
+                       data-lang-vi="Tổng Tiền:"
+                       data-lang-de="Gesamtmenge:"
+                       data-lang-kr="총액:"
+                       data-lang-jp="合計金額：">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Order Status"
+                       data-lang-vi="Trạng Thái Đơn Hàng"
+                       data-lang-de="Bestellstatus"
+                       data-lang-kr="주문 상태"
+                       data-lang-jp="注文の状況">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Order Date"
+                       data-lang-vi="Ngày Đặt Hàng"
+                       data-lang-de="Auftragsdatum"
+                       data-lang-kr="주문일"
+                       data-lang-jp="注文日">
+                    </p>
+                </td>
+                <td>
+                    <p 
+                       data-lang="vi"
+                       data-lang-en="Functionality"
+                       data-lang-vi="Chức Năng"
+                       data-lang-de="Funktionalität"
+                       data-lang-kr="기능"
+                       data-lang-jp="関数">
+                    </p>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        #@item.Id
+                    </th>
+                    <td>
+                        @item.DeliverUser
+                    </td>
+                    <td>@item.DeliverAddress</td>
+                    <td>@item.DeliverPhone</td>
+                    <td>@item.OrderDetails?.Count 
+                        <span 
+                            data-lang="vi"
+                            data-lang-en="Items"
+                            data-lang-vi="Mặt Hàng"
+                            data-lang-de="Artikel"
+                            data-lang-kr="아이템"
+                            data-lang-jp="アイテム">
+                        </span>
+                    </td>
+                    <td>
+                        @String.Format("{0:C}", item.TotalPrice)
+                    </td>
+                    <td>@item.Status</td>
+                    <td>@item.Created_Date</td>
+                    <td>
+                        <a asp-controller="Order" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success rounded-0"
+                           data-lang="vi"
+                           data-lang-en="View Details"
+                           data-lang-vi="Xem Chi Tiết"
+                           data-lang-de="Details anzeigen"
+                           data-lang-kr="세부 정보보기"
+                           data-lang-jp="詳細を見る">
+                        </a>
+                        <a asp-controller="Order" asp-action="CancelOrder" asp-route-id="@item.Id" class="btn btn-outline-danger rounded-0"
+                           data-lang="vi"
+                           data-lang-en="Cancel Order"
+                           data-lang-vi="Hủy Đơn Hàng"
+                           data-lang-de="Auftrag stornieren"
+                           data-lang-kr="주문 취소"
+                           data-lang-jp="注文のキャンセル">
+                    </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<script src="~/js/language.js"></script>

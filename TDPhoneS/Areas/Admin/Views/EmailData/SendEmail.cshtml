@@ -1,0 +1,96 @@
+﻿@model SendEmailMVC.Models.EmailData
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gửi Email";
+}
+<link rel="stylesheet" href="~/Admin/dist/css/reponsive_dashboard.css">
+
+<h4 class="text-success" style="margin-top: 10px; margin: 0 auto; text-align: center; color: black !important;">Gửi Email Đến Khách Hàng</h4>
+<hr class="text-success" />
+<div class="d-flex justify-content-center" id="container_email">
+    <div class="alert alert-dismissible fade show text-secondary indexText col-6" role="alert">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SendEmail" method="post">
+            <div class="col-12 mb-3">
+                <label asp-for="To" class="input_email"  style="color: black !important;">Nhập Địa Chỉ Email</label>
+                <input asp-for="To" class="form-control" placeholder="user@gmail.com"/>
+                <span asp-validation-for="To" class="text-danger"></span>
+            </div>
+            <div class="col-12 mb-3">
+                <label asp-for="Subject" class="input_email" style="color: black !important;">Tiêu Đề</label>
+                <input asp-for="Subject" class="form-control" placeholder="Xin Chào Quý Khách Hàng! Chúng Tôi là TDPhoneS" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="col-12 mb-3" id="noidung_textarea">
+                <label asp-for="Body" class="input_email" style="color: black !important;">Nội Dung</label>
+                <textarea asp-for="Body" class="form-control" id="editor"  rows="3"></textarea>
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="col-4">
+                <!--<button type="submit" class="btn btn-outline-success">Send Email</button>-->
+                <button type="submit" class="button_send_email">
+                    Gửi Email
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .button_send_email {
+        cursor: pointer;
+        position: relative;
+        padding: 10px 24px;
+        font-size: 18px;
+        color: red;
+        border: 2px dashed red;
+        border-radius: 10px;
+        background-color: transparent;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        overflow: hidden;
+
+}
+
+        .button_send_email::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: inherit;
+            scale: 0;
+            z-index: -1;
+            background-color: #52ff00;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .button_send_email:hover::before {
+            scale: 3;
+        }
+
+        .button_send_email:hover {
+            color: #000000;
+            scale: 1.1;
+            box-shadow: 0 0px 20px rgba(193, 163, 98,0.4);
+            border: 2px dashed #000000;
+        }
+
+        .button_send_email:active {
+            scale: 1;
+        }
+</style>
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <partial src="_ValidationScriptsPartial.cshtml"></partial>
+    <script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+}

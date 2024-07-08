@@ -1,0 +1,334 @@
+﻿@model IEnumerable<TDPhoneS.Models.DataModels.Category>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Home Page";
+    var userFound = ViewBag.userFound;
+
+}
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div class="inner-content" style="margin-top: 70px;">
+                            <h4 style="margin-top: -360px; margin-left: -10px;"
+                                data-lang="vi"
+                                data-lang-en="We are TDPhoneS"
+                                data-lang-vi="Chúng Tôi là TDPhoneS"
+                                data-lang-de="Wir sind TDPhoneS"
+                                data-lang-kr="우리는 TDPhoneS입니다"
+                                data-lang-jp="私たちはTDPhoneSです">
+                                Chúng Tôi là TDPhoneS
+                                </h4>
+                            <div class="main-border-button" style="margin-top: 400px; margin-left: 250px;">
+                                <a asp-controller="Product" asp-action="Index"
+                                   data-lang="vi"
+                                   data-lang-en="See More"
+                                   data-lang-vi="Xem Thêm"
+                                   data-lang-de="Mehr Sehen"
+                                   data-lang-kr="더보기"
+                                   data-lang-jp="続きを見る">
+                                    Xem Thêm
+                            </a>
+                            </div>
+                        </div>
+                        <!--<img src="~/assets/images/left-banner-image.jpg" alt="">-->
+                        <img style="object-fit: contain ; border-radius: 50px;" src="https://cdn.dribbble.com/users/7171905/screenshots/20301593/media/c1d3a43a31ee5c1d6b0dd7004402a2f1.gif" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        @foreach (var items in Model)
+                        {
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>@items.Name</h4>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>@items.Name</h4>
+                                                <div class="main-border-button">
+                                                    <a asp-controller="Product" asp-action="Index" asp-route-cateId="@items.Id">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="~/Uploads/category/@items.Image">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+@if (Model.Count() > 0)
+{
+    foreach (var cate in Model)
+    {
+        <!-- ***** Category Area Starts ***** -->
+        <section class="section" id="men">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="section-heading">
+                            <h2 data-lang="vi"
+                                data-lang-en="@cate.Name Latest"
+                                data-lang-vi="@cate.Name Mới Nhất"
+                                data-lang-de="@cate.Name Neueste"
+                                data-lang-kr="@cate.Name 최신"
+                                data-lang-jp="@cate.Name 最新">
+                            </h2>
+                            <!--<h2>@cate.Name Latest</h2>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="men-item-carousel">
+                            @if (cate?.Products.Count > 0)
+                            {
+                                if (cate?.Products.Count == 1)
+                                {
+                                    @foreach (var item in cate.Products.OrderByDescending(x => x.Id).Take(4))
+                                    {
+                                        <div class="item col-lg-4">
+                                            <div class="thumb">
+                                                <div class="hover-content">
+                                                    <ul>
+                                                        <li><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a></li>
+
+                                                    </ul>
+                                                </div>
+                                                <img src="~/Uploads/product/@item.Image" alt="" class="card-img">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>@item.Name</h4>
+                                                @if (item.SalePrice > 0)
+                                                {
+                                                    <span>$ @item.SalePrice - <del>$ @item.Price</del></span>
+                                                }
+                                                else
+                                                {
+                                                    <span>$ @item.Price </span>
+                                                }
+                                                <ul class="stars">
+                                                    @if (userFound != null)
+                                                    {
+                                                        <li>
+                                                            <form asp-controller="Cart" asp-action="AddToCart">
+                                                                <input type="hidden" name="accId" value="@userFound.Id" />
+                                                                <input type="hidden" name="prodId" value="@item.Id" />
+
+                                                                <input type="hidden" name="quantity" value="1">
+                                                                <button type="submit" class="fa fa-shopping-cart btn btn-outline-secondary rounded-0" title="Add To Cart">
+                                                                </button>
+                                                            </form>
+                                                            @* <a asp-controller="Cart"
+                                    asp-action="AddToCart"
+                                    asp-route-accId="@User?.Claims?.Take(0)?.FirstOrDefault()?.Value"
+                                    asp-route-prodId="@item.Id"></a> *@
+                                                        </li>
+                                                    }
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                                else
+                                {
+                                    <div class="owl-men-item owl-carousel">
+
+                                        @foreach (var item in cate.Products.OrderByDescending(x => x.Id).Take(4))
+                                        {
+                                            <div class="item">
+                                                <div class="thumb">
+                                                    <div class="hover-content">
+                                                        <ul>
+                                                            <li><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <img src="~/Uploads/product/@item.Image" alt="">
+                                                </div>
+                                                <div class="down-content ">
+                                                    <div>
+                                                        <h4>@item.Name</h4>
+                                                        @if (item.SalePrice > 0)
+                                                        {
+                                                            <span>$ @item.SalePrice - <del>$ @item.Price</del></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>$ @item.Price </span>
+                                                        }
+                                                    </div>
+
+                                                    <ul class="stars">
+                                                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("userID") != null)
+                                                        {
+                                                            <li>
+                                                                <form asp-controller="Cart" asp-action="AddToCart">
+                                                                    <input type="hidden" name="accId" value="@userFound.Id" />
+                                                                    <input type="hidden" name="prodId" value="@item.Id" />
+
+                                                                    <input type="hidden" name="quantity" value="1">
+                                                                    <button type="submit" class="fa fa-shopping-cart btn btn-outline-secondary rounded-0" title="Add To Cart">
+                                                                    </button>
+                                                                </form>
+                                                                @* <a asp-controller="Cart"
+                                        asp-action="AddToCart"
+                                        asp-route-accId="@User?.Claims?.Take(0)?.FirstOrDefault()?.Value"
+                                        asp-route-prodId="@item.Id"></a> *@
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p 
+                                   data-lang="vi"
+                                   data-lang-en="This Product Category is Empty!"
+                                   data-lang-vi="Danh Mục Sản Phẩm Này Đang Trống!"
+                                   data-lang-de="Diese Produktkategorie ist leer!"
+                                   data-lang-kr="이 제품 카테고리는 비어 있습니다!"
+                                   data-lang-jp="この商品カテゴリーは空です!">
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ***** Category Area Ends ***** -->
+    }
+}
+else
+{
+    <p>Nothing To Display Here</p>
+}
+
+<!-- ***** Social Area Starts ***** -->
+<section class="section" id="social">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                    <h2 style="font-family: 'FontAwesome'"
+                        data-lang="vi"
+                        data-lang-en="Phone Company Cooperates With TDPhoneS"
+                        data-lang-vi="Hãng Điện Thoại Hợp Tác Với TDPhoneS"
+                        data-lang-de="Telefongesellschaft kooperiert mit TDPhoneS"
+                        data-lang-kr="전화 회사는 TDPhoneS와 협력합니다"
+                        data-lang-jp="電話会社がTDPhoneSと協力">
+                    </h2>
+                    <span style="font-size: 16px;"
+                          data-lang="vi"
+                          data-lang-en="TDPhoneS Gives Trust and Reputation to Regain Trust from Customers."
+                          data-lang-vi="TDPhoneS Trao Niềm Tin Và Uy Tín Để Nhận Lại Được Sự Tin Cậy Từ Khách Hàng."
+                          data-lang-de="TDPhoneS schafft Vertrauen und Reputation, um das Vertrauen der Kunden zurückzugewinnen."
+                          data-lang-kr="TDPhoneS는 고객의 신뢰를 회복하기 위해 신뢰와 명성을 제공합니다."
+                          data-lang-jp="TDPhoneSは信頼と評判を与え、お客様からの信頼を回復します。">
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row images">
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.mi.com/vn/">
+                            <h6 style="font-size: 20px; font-weight: bold;">Xiaomi</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Xiaomi_logo_%282021-%29.svg/512px-Xiaomi_logo_%282021-%29.svg.png" alt="">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.samsung.com/vn/">
+                            <h6 style="font-size: 20px; font-weight: bold;">Samsung</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img src="https://i.pinimg.com/736x/f8/e3/4a/f8e34a4763987dcab1c15888cb0830d0.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.apple.com/vn/iphone/">
+                            <h6 style="font-size: 20px; font-weight: bold;">iPhone</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRp2mR0CdFvcByo2HJJ8f_4N-HD31lYHIMewOwyMU_8JQjBEoSU" alt="">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.oppo.com/vn/">
+                            <h6 style="font-size: 20px; font-weight: bold;">OPPO</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img style="height: 185px;" src="https://static.vecteezy.com/system/resources/previews/020/190/680/non_2x/oppo-logo-oppo-icon-free-free-vector.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.vivo.com/vn/products">
+                            <h6 style="font-size: 20px; font-weight: bold;">VIVO</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img style="height: 185px;" src="https://www.logo.wine/a/logo/Vivo_(technology_company)/Vivo_(technology_company)-Logo.wine.svg" alt="">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="thumb">
+                    <div class="icon">
+                        <a href="https://www.realme.com/vn/">
+                            <h6 style="font-size: 20px; font-weight: bold;">Realme</h6>
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </div>
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSwTsDgAlYpNptCeBIorgASpkxUWOn3ago-nMoHMeO7nn4x5af5" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script src="~/js/language.js"></script>
+
+<!-- ***** Social Area Ends ***** -->

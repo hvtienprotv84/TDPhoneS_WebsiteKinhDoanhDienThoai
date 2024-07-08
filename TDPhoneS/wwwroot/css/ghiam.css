@@ -1,0 +1,23 @@
+﻿.ghiam_css {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: -180px;
+}
+#input{
+    max-width:170px;
+}
+#startRecordingBtn {
+    position: absolute;
+    margin-top: -50px;
+    width: 140px;
+}
+
+#nav_css{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -10px;
+}

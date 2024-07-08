@@ -1,0 +1,47 @@
+﻿@model TDPhoneS.Models.DataModels.Category
+
+@{
+    ViewData["Title"] = "Xóa Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Xóa Danh Mục</h1>
+
+<h3>Bạn Có Chắc Chắn Muốn Xóa Danh Mục Này?</h3>
+<hr />
+<div>
+    <h4>Danh Mục</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            <p>Tên Danh Mục</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            <p>Trạng Thái</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @(Model.Status == 1 ? "Show" : "Hide")
+        </dd>
+        <dt class = "col-sm-2">
+            <p>Ngày Tạo</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created_Date)
+        </dd>
+        <dt class = "col-sm-2">
+            <p>Ngày Cập Nhật</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Updated_Date)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" onsubmit="return confirm('Bạn Chắc Chắn Chứ?')">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Xóa" class="btn btn-outline-danger rounded-0" /> |
+        <a asp-action="Index" class="btn btn-outline-secondary rounded-0">Trở Về Trang Danh Sách Danh Mục</a>
+    </form>
+</div>

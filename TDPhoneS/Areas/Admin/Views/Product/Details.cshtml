@@ -1,0 +1,78 @@
+﻿@model TDPhoneS.Models.DataModels.Product
+
+@{
+    ViewData["Title"] = "Chi Tiết Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+    <h4>Chi Tiết Sản Phẩm Của: @Model.Name</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tên Sản Phẩm
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Hình Ảnh Sản Phẩm
+        </dt>
+        <dd class="col-sm-10">
+            <img style="width:80px" class="card-img" width="80px" src="~/Uploads/product/@Model.Image" />
+        </dd>
+        <dt class="col-sm-2">
+            Giá Gốc Sản Phẩm
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            Giá Giảm Sản Phẩm
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SalePrice)
+        </dd>
+        <dt class="col-sm-2">
+            Trạng Thái
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Status == 1)
+            {
+                <span class="badge badge-success">Còn Hàng</span>
+            } else
+            {
+                <span class="badge badge-danger">Hết Hàng</span>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Mô Tả
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descriptions)
+        </dd>
+        <dt class="col-sm-2">
+            Danh Mục
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+        <dt class="col-sm-2">
+           Ngày Tạo
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Created_Date != null ? Model.Created_Date.Value.ToString("dd / MM / yyyy hh:mm:ss") : "Null")
+        </dd>
+        <dt class="col-sm-2">
+           Ngày Cập Nhật
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Updated_Date != null ? Model.Updated_Date.Value.ToString("dd / MM / yyyy hh:mm:ss") : "Null")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-success rounded-0" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-outline-secondary rounded-0" asp-action="Index">Trở Về Trang Danh Sách Sản Phẩm</a>
+</div>
